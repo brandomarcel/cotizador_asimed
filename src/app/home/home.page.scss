@@ -11,6 +11,7 @@
 #container strong {
   font-size: 20px;
   line-height: 26px;
+  display: flex;
 }
 
 #container p {
@@ -19,9 +20,207 @@
 
   color: #8c8c8c;
 
-  margin: 0;
+  margin : 0;
 }
 
 #container a {
   text-decoration: none;
+}
+
+
+body{
+  font-size:1em;
+   height: 100%;
+}
+
+h3 {
+  font-family: Lato;
+  text-align: center;
+  color:	#0080ff;
+}
+
+.circles{
+  height: 40px;
+  width: 40px;
+  border: 1.5px solid #001b83;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active{
+    background-color:#edac39;
+}
+
+.circle-desc-active{
+font-weight: bold;
+}
+
+.bar{
+  width: 10%;
+  height: 0.063em;
+  margin-bottom:0.469em;
+  border: 1px solid #001b83;
+  color:#000;
+  background-color:#000;
+  display: inline-block;
+  text-align:center;
+  margin:"0 auto";
+}
+
+.container{
+  min-width:320px;
+  margin: "0px auto";
+  text-align: start;
+}
+
+.circle-desc{
+ position: absolute;
+ top:200px;
+ font-size: 0.9em;
+ width: 100px;
+ margin-left:-30px;
+}
+
+@media only screen and (max-width: 320px){
+   body {
+     font-size:20%
+  }
+} 
+
+/*extra small devices*/
+@media only screen and (max-width: 600px){
+   body {
+     font-size:40%
+  }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+   body {
+     font-size:60%
+  }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  body {
+     font-size:80%
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  body {
+     font-size:100%
+  }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+   body {
+     font-size:120%
+  }
+}
+
+
+
+
+[cards] {
+  .grid-full ion-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 5px 0;
+  }
+  .row {
+      padding: 0;
+  }
+  .col {
+      padding: 5px 0;
+  }
+  .card {
+      margin: 0 0 0 12px;
+      padding: 14px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+      border-radius: 4px;
+  }
+}
+.titulos{
+  font-weight: bold;
+  color: #858585;  
+  text-align: justify;
+
+}
+.subtitulos{
+  color: black;
+  font-size: medium;
+  padding-left: 20px;
+}
+.texto{
+  color: #17202A;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+.myCustomSelect{
+  max-width: 100% !important;
+ }
+.bordesregistro{
+ 
+     border: 1px solid  #001b83 !important;
+}
+
+
+.center {
+  display: block;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  background: #e7e7e78c;
+}
+
+.texto{
+
+border: 1px solid  #001b83 !important;
+background: #e7e7e78c;
+text-transform: uppercase;
+height: 43px;
+}
+.label{
+  //padding-left: 20px;
+   color: #001b83;
+    font-weight: bold;
+}
+
+.datosPlan{
+
+ 
+  color: #000;
+  text-transform: uppercase;
+  
+  }
+
+  .prueba{
+    height: 100%;
+    width: 100%;
+    background-color: #001b83;
+  }
+
+  .cardBajoTitulo {
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+}
+
+.cardBajo {
+  border: 1px solid #001d86;
+  border-radius: 25px;
+  background-color: #fff;
+ 
+}
+.cardBajoCabecera {
+  background-color: #001b83;
+ 
 }

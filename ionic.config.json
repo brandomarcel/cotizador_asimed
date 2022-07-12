@@ -1,5 +1,7 @@
 {
   "name": "cotizador_asimed",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

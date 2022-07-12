@@ -3,6 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+   apiUrl: 'http://192.168.100.87:81/api/',
+
+  ///////////////////////////////////////
+   //apiUrl: 'http://186.5.109.203/api/',
+  //////////////////////////////////////////////////
+
+  api_secret:'5559c3698f1d1896c7867bd8b7657f7a',
   production: false
 };
 

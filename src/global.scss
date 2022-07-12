@@ -24,3 +24,59 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.listaitem{
+    --background: #FFFFFF  !important; 
+    
+}
+.secondary {
+  background: #ffffff !important;
+  color: #001c71 !important;
+}
+
+.customAlertCss {
+  
+ 
+.alert-radio-icon.sc-ion-alert-md {
+
+  border-color: var(--ion-color-step-550, #edac39);
+}
+.alert-button.sc-ion-alert-md {
+
+  color: #001c71;
+
+}
+
+.alert-radio-inner.sc-ion-alert-md {
+
+  background-color: #001c71;
+}
+[aria-checked=true].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+  border-color: #001c71;
+}
+
+
+}
+
+
+
+
+
+.colores{
+  --placeholder-color:#001c71 !important;
+}
+
+.listaitem :hover{
+   
+    background-color: #edac39;
+    transition: background-color .5s;
+    color: black;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
