@@ -1,13 +1,15 @@
+import { PruebaPage } from './../prueba/prueba.page';
 
 import { ConexionService } from './../services/conexion.service';
 import { Component } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Registro } from '../entidades/registro';
 import { Validar } from '../entidades/validar';
 
 
 declare var externo;
-
+declare var guardado;
+declare var h;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -19,19 +21,66 @@ export class HomePage {
 
   async llanarexterno(){
 
+/*     const modal = await this.modalController.create({
+      component: PruebaPage,
+      componentProps: {
+       nuevo:"https://checkout-test.placetopay.ec/session/553976/f356e5a2b4a844e0b4602dc8deaf4d6a"
+      }
+
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    console.log(data)
+    try {
 
 
+      //this.cargarUsuarios();
+
+
+    } catch (error) {
+      console.log('error');
+    } */
     //externo();
-     var a = await externo("https://checkout-test.placetopay.ec/session/553924/64e4fa3d8e805fb133ddfbb87d583991");
-     setTimeout(() => {
-      var p = (localStorage.getItem('datos'))
-      console.log(p);
+    
+/* 
+    const promise = new Promise((resolve, reject) => {
       
-    }, 2500);
+      var a = resolve(externo("https://checkout-test.placetopay.ec/session/554097/e129fa17e3116404a9b0a7d34ec96789"));
+  });
+  promise.then((res) => {
+      console.log('I get called:', res); // Devuelve: true
+  });
+  promise.catch((err) => {
+      // Nuca es utilizado
+  }); */
 
-    var p =localStorage.getItem('datos')
-      console.log(p);
-    console.log(a);
+  
+  const promise = new Promise((resolve, reject) => {
+      console.log("aki")
+    resolve(externo("https://checkout-test.placetopay.ec/session/554129/a3dbf1ba28414b0dc6dba0bd8d9b0cbf"));
+  
+});
+promise.then((res) => {
+
+  
+  var p = guardado();
+
+  console.log(p)
+  console.log(h)
+
+  /* var p =localStorage.getItem('datos')
+  console.log(p);
+ */
+});
+
+
+      
+    
+
+   
 
    
     
@@ -109,7 +158,7 @@ export class HomePage {
 
   sig = document.getElementById("siguiente");
   constructor(private conexionService: ConexionService, private loadingController: LoadingController,
-     private alertController: AlertController) { }
+     private alertController: AlertController,private modalController:ModalController) { }
   ngOnInit() {
 
     this.botones = true;
