@@ -3,19 +3,22 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
 
 
 
-  <ion-grid style="text-align: center;">
+<ion-content [fullscreen]="true" class="fondologin">
+
+  <ion-grid style="text-align: center; ">
     <h3><img src="assets/images/logo.png" style="height: 120px; width: 170px;"></h3>
 
 
 
     <span *ngFor="let item of counts;let i = index">
-      <span class="circle-desc" [class.circle-desc-active]="orderStatus == item"> {{ item }}</span>
-      <span class="circles" [class.active]="orderStatus == item">
-        <ion-icon name="person"></ion-icon>
+      <span class="circle-desc" [class.circle-desc-active]="orderStatus == item.name"> {{item["name"] }}</span>
+      <span class="circles" [class.active]="orderStatus == item.name">
+    
+        <ion-icon  name="{{item['icono']}}"></ion-icon>
+   
       </span>
       <span class="bar" *ngIf="(i != counts.length-1)"></span>
     </span>
@@ -23,139 +26,151 @@
 
 
   <!-- PASO1 -->
-  <ion-grid class="container" *ngIf="estado1">
-
-    <div class="container">
-      <ion-row style="padding-left: 10px;padding-right: 10px; padding-top: 20px;">
-        <ion-col size-xs="12" size-md="12" size-xl="8.5" offset-xl="2.5" offset-md="1.5">
-
-          <ion-row>
-            <ion-col size="12">
-              <ion-text class="titulos">A continuacion ingrese la informacion necesaria</ion-text>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-
-            <ion-col size-xs="12" size-md="1.5" size-xl="1.5">
-              <ion-label class="label">Cedula</ion-label>
-
-              <ion-input [(ngModel)]="cedulaTitular" class="texto" (ionChange)="consultarCedula($event)">
-              </ion-input>
-
-            </ion-col>
-
-            <ion-col size-xs="12" size-md="2.5" size-xl="3">
-              <ion-label class="label">Nombres</ion-label>
+  
+  <div class="container" *ngIf="estado1">
+  <ion-grid  >
+    <ion-row style="padding-top: 20px;">
+      <ion-col size-xs="12" size-md="9" size-xl="6" offset-xl="3" offset-md="1.5">
 
 
+<div class="secondary-background">
+ 
+  <ion-row>
+    <ion-col size="12">
 
-              <ion-input [(ngModel)]="nombre1" class="texto" id="nombre1">
-              </ion-input>
+      <label  class="titulo">Ingresa tus <strong >Datos</strong></label>
+      <br>
+      <label  class="subtitulo">Nuestra base de datos te facilitará la tarea</label>
+    </ion-col>
+  </ion-row>
 
-            </ion-col>
+  <ion-row>
 
-            <ion-col size-xs="12" size-md="2.5" size-xl="3">
-              <ion-label class="label">Apellidos</ion-label>
+    <ion-col size-xs="12" size-md="2" size-xl="2">
+
+      <ion-label class="label" position="stacked">Cedula</ion-label>
+     
+      <ion-input [(ngModel)]="cedulaTitular" class="texto"  (ionChange)="consultarCedula($event)">
+      </ion-input>
+
+    </ion-col>
+
+    <ion-col size-xs="12" size-md="3.25" size-xl="3.5">
+      <ion-label class="label">Nombres</ion-label>
 
 
 
-              <ion-input [(ngModel)]="apellido1" class="texto" id="apellido1">
-              </ion-input>
+      <ion-input [(ngModel)]="nombre1" class="texto" id="nombre1">
+      </ion-input>
 
-            </ion-col>
+    </ion-col>
 
-            <ion-col size-xs="12" size-md="3" size-xl="2.5">
-
-              <ion-label class="label">Fecha de Nacimiento</ion-label>
-
-
-              <ion-input (ionChange)="calculoEdad($event)" class="texto" id="fechaconsulta" type="date"
-                value="fechaconsulta" id="fechanacTitular" [(ngModel)]="fechanacTitular"></ion-input>
-
-              <!-- <ion-select [interfaceOptions]="customAlertOptions"  cancelText="Cancelar" [interfaceOptions]="customAlertOptions"  cancelText="Cancelar"  style="border: 0.5px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px; " [(ngModel)]="edad1">
-                <ion-select-option *ngFor="let item of listaEdades" value="{{item}}">{{item}}</ion-select-option>
-              </ion-select> -->
-
-
-            </ion-col>
-
-
-          </ion-row>
-
-
-          <ion-row>
-
-
-            <ion-col size-xs="12" size-md="3.5" size-xl="3.5">
-              <ion-label class="label">Correo</ion-label>
+    <ion-col size-xs="12" size-md="3.25" size-xl="3.5">
+      <ion-label class="label">Apellidos</ion-label>
 
 
 
-              <ion-input type="email" [(ngModel)]="correo1" style="border: 1px solid  #001b83 !important;
-              background: #e7e7e78c; 
-              text-transform: lowercase;
-              color: dark;
-              height: 43px;
-              border-radius: 8px;" id="correo1">
-              </ion-input>
+      <ion-input [(ngModel)]="apellido1" class="texto" id="apellido1">
+      </ion-input>
 
-            </ion-col>
+    </ion-col>
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
-              <ion-label class="label">Teléfono</ion-label>
+    <ion-col size-xs="12" size-md="3.5" size-xl="3">
+
+      <ion-label class="label">Fecha de Nacimiento</ion-label>
 
 
-              <ion-input [(ngModel)]="telefono1" class="texto" type="number">
-              </ion-input>
+      <ion-input (ionChange)="calculoEdad($event)" class="texto" id="fechaconsulta" type="date"
+        value="fechaconsulta" id="fechanacTitular" [(ngModel)]="fechanacTitular"></ion-input>
+
+      <!-- <ion-select [interfaceOptions]="customAlertOptions"  cancelText="Cancelar" [interfaceOptions]="customAlertOptions"  cancelText="Cancelar"  style="border: 0.5px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px; " [(ngModel)]="edad1">
+        <ion-select-option *ngFor="let item of listaEdades" value="{{item}}">{{item}}</ion-select-option>
+      </ion-select> -->
+
+
+    </ion-col>
+
+
+  </ion-row>
+
+
+  <ion-row>
+
+
+    <ion-col size-xs="12" size-md="4" size-xl="4">
+      <ion-label class="label">Correo</ion-label>
 
 
 
-            </ion-col>
+      <ion-input type="email" [(ngModel)]="correo1"class="texto" id="correo1">
+      </ion-input>
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
-              <ion-label class="label">Celular</ion-label>
+    </ion-col>
 
-
-              <ion-input [(ngModel)]="celular1" class="texto" type="number" id="celular1">
-              </ion-input>
-
-            </ion-col>
-
-            <ion-col size-xs="12" size-md="2" size-xl="2.5">
-
-              <ion-label style=" color: #001b83;font-weight: bold;">Genero</ion-label>
-              <ion-select id="genero1" [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
-                style="border: 1px solid  #001b83 ; background: #e7e7e78c; border-radius: 8px;" [(ngModel)]="genero1">
-                <ion-select-option value="Masculino">Masculino</ion-select-option>
-                <ion-select-option value="Femenino">Femenino</ion-select-option>
-              </ion-select>
+    <ion-col size-xs="6" size-md="2.5" size-xl="2.5">
+      <ion-icon  name="call" style="color: #001d86;"  >
+      </ion-icon>
+      <ion-label class="label">Domicilio</ion-label>
 
 
-            </ion-col>
+      <ion-input [(ngModel)]="telefono1" id="telefono1" class="texto" type="number">
+      </ion-input>
 
-          </ion-row>
 
-        </ion-col>
-      </ion-row>
-    </div>
+
+    </ion-col>
+
+    <ion-col size-xs="6" size-md="2.5" size-xl="2.5">
+      <ion-label class="label">Celular</ion-label>
+
+
+      <ion-input [(ngModel)]="celular1" class="texto" type="number" id="celular1">
+      </ion-input>
+
+    </ion-col>
+
+    <ion-col size-xs="12" size-md="3" size-xl="3">
+
+      <ion-label style=" color: #001b83;font-weight: bold;">Genero</ion-label>
+      <ion-select id="genero1" [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
+      class="texto"[(ngModel)]="genero1">
+        <ion-select-option value="Masculino">Masculino</ion-select-option>
+        <ion-select-option value="Femenino">Femenino</ion-select-option>
+      </ion-select>
+
+
+    </ion-col>
+
+  </ion-row>
+</div>
+      </ion-col>
+
+    </ion-row>
 
   </ion-grid>
-
+</div>
   <!-- PASO2 -->
-  <ion-grid class="container" *ngIf="estado2">
-    <div class="grid-full">
+
+  <div class="container" *ngIf="estado2">
+    <ion-grid  >
+      <ion-row style="padding-top: 20px;">
+        <ion-col size-xs="12" size-md="7" size-xl="6" offset-xl="3" offset-md="2.5">
+  
+  
+
+          <div class="secondary-background">
+ 
 
 
-
-
-
-      <ion-row style="padding-left: 10px;padding-right: 10px; padding-top: 20px;">
-        <ion-col size-xs="12" size-md="10" size-xl="8" offset-xl="2.5" offset-md="1.5">
+      <ion-row >
+        <ion-col size-xs="12" size-md="12" size-xl="12">
 
           <ion-row>
             <ion-col size="12">
-              <ion-text class="titulos">Beneficiarios</ion-text>
+
+              <label  class="titulo">Datos de <strong >Beneficiarios</strong></label>
+              <br>
+              <label  class="subtitulo">Añada beneficiarios de ser necesario</label>
             </ion-col>
           </ion-row>
 
@@ -185,11 +200,11 @@
 
               </ion-row> -->
 
-              <ion-row>
+              <ion-row >
 
 
 
-                <ion-col size-xs="12" size-md="3.5" size-xl="3.5"
+                <ion-col size-xs="12" size-md="4" size-xl="3.5"
                   style="padding-left: 20px;padding-right: 20px;border: 1px solid  #001b83 !important;">
                   <ion-label class="label">Edad</ion-label>
                   <ion-select [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
@@ -213,7 +228,7 @@
 
                 </ion-col>
 
-                <ion-col size-xs="12" size-md="3.5" size-xl="3.5"
+                <ion-col size-xs="12" size-md="4.5" size-xl="4"
                   style="padding-left: 20px;padding-right: 20px;border: 1px solid  #001b83 !important;">
                   <ion-label class="label">Parentesco</ion-label>
 
@@ -239,7 +254,7 @@
                 <div class="container">
                   <div class="form-group">
                     <ion-row *ngFor="let word2 of words2; let in=index">
-                      <ion-col size-xs="12" size-md="3.5" size-xl="3.5"
+                      <ion-col size-xs="12" size-md="4" size-xl="3.5"
                         style="padding-left: 20px;padding-right: 20px;border: 1px solid  #001b83 !important;">
 
 
@@ -271,7 +286,7 @@
                     {{formRef.form.name1}}-->
                       </ion-col>
 
-                      <ion-col size-xs="12" size-md="3.5" size-xl="3.5"
+                      <ion-col size-xs="12" size-md="3.5" size-xl="4"
                         style="padding-left: 20px;padding-right: 20px;border: 1px solid  #001b83 !important;">
 
 
@@ -306,12 +321,12 @@
                   <br />
                 </div>
 
-                <ion-item class="center" lines="none">
+               
                   <ion-button
                     style="background-color: #f5f5f5; border-color: #f5f5f5;--background: #001c71;border-radius: 8px;"
                     id="atras" [disabled]="!formRef.form.valid" (click)="add()">Añadir Beneficiario
                   </ion-button>
-                </ion-item>
+               
 
 
               </form>
@@ -329,21 +344,46 @@
 
         </ion-col>
       </ion-row>
+
     </div>
+    </ion-col>
+
+  </ion-row>
 
 
-  </ion-grid>
+  
+
+</ion-grid>
+</div>
 
   <!-- PASO3 -->
-  <ion-grid class="container" *ngIf="estado3" style="text-align: center;">
+
+  <div class="container" *ngIf="estado3">
+    <ion-grid  >
+      <ion-row style="padding-top: 20px;">
+        <ion-col size-xs="12" size-md="8" size-xl="6" offset-xl="3" offset-md="2">
+  
+  
+
+          <div class="secondary-background">
+
+            
+
     <div class="grid-full">
 
 
+      <ion-row>
+        <ion-col size="12">
 
+          <label  class="titulo">Encontramos los mejores <strong >Planes</strong></label>
+          <br>
+          <label  class="subtitulo">Seleccione un plan</label>
+        </ion-col>
+      </ion-row>
 
 
       <ion-row style="padding-left: 10px;padding-right: 10px; padding-top: 20px;">
-        <ion-col size-xs="12" size-md="10" size-xl="8" offset-xl="2" offset-md="2">
+        <ion-col size-xs="12" size-md="10" size-xl="12" >
 
 
 
@@ -354,15 +394,15 @@
 
 
 
-                <ion-col size-xs="12" size-md="2" size-xl="2.5">
+                <ion-col size-xs="12" size-md="2" size-xl="2">
                   <ion-label class="label">Titular:</ion-label>
 
                 </ion-col>
-                <ion-col size-xs="12" size-md="4" size-xl="4">
+                <ion-col size-xs="12" size-md="5.5" size-xl="6">
                   <ion-label class="datosPlan">{{nombre1}} {{apellido1}}</ion-label>
 
                 </ion-col>
-                <ion-col size-xs="12" size-md="2" size-xl="2">
+                <ion-col size-xs="12" size-md="3" size-xl="3">
                   <ion-label class="datosPlan">{{genero1}}</ion-label>
 
                 </ion-col>
@@ -405,11 +445,6 @@
       </ion-row>
     </div>
 
-    <ion-row>
-      <ion-col size="12">
-        <ion-text class="titulos"> Seleccione un Plan</ion-text>
-      </ion-col>
-    </ion-row>
 
     <ion-row style=" display: flex; justify-content: center;" *ngIf="tresDatos" >
       <!--    <ion-col *ngFor="let item of listaPlanes" size-xs="12" size-md="4" size-xl="4">
@@ -429,7 +464,7 @@
 
 
         </ion-button> -->
-        <ion-col  size-xs="12" size-md="9" size-xl="8"  >
+        <ion-col  size-xs="12" size-md="12" size-xl="12"  >
           <ion-row style=" display: flex; justify-content: center;">
             <ion-col *ngFor="let item of listaPlanes; let in=index" size-xs="10" size-md="4" size-xl="4">
 
@@ -449,7 +484,7 @@
                   <h3 style="text-align: center; color: darkblue;">
                     Prima Anual
                   </h3>
-                  <div class="centrar" *ngIf="mostrar1'{{in}}'">
+                  <div class="centrardivs" *ngIf="mostrar1'{{in}}'">
                     <hr color="#F9B727">
                     <label class="subtitulo-small">
                       Mostrar Detalles
@@ -469,7 +504,7 @@
                           <h5>
                             <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
                               class="md hydrated" aria-label="checkmark circle"></ion-icon> &nbsp; Amparo Patrimonial
-                            (Cobertura por Negligencia)
+                           
                           </h5>
                         </td>
                       </tr>
@@ -486,7 +521,7 @@
                           <h5>
                             <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
                               class="md hydrated" aria-label="checkmark circle"></ion-icon> &nbsp; Responsabilidad Civil
-                            (Daños a terceros)
+                            
                           </h5>
                         </td>
                       </tr>
@@ -509,7 +544,7 @@
                       </tr>
                       <!---->
                     </table>
-                    <div class="centrar" (click)="activar2($event,in)">
+                    <div class="centrardivs" (click)="activar2($event,in)">
                       <hr color="#F9B727">
                       <ion-icon name="chevron-up" size="small" style="color: #F9B727;" role="img"
                         class="md icon-small hydrated" aria-label="chevron up"></ion-icon>
@@ -526,11 +561,15 @@
         
               </ion-card>
 
-              <ion-col size="12">
+              <div class="centrardivs">
+                <ion-col size="12">
       
-                <button (click)="getCondiciones_pdf(item)">Ver Condiciones Particulares</button>
-      
-              </ion-col>
+                  <button style="text-align: center;" (click)="getCondiciones_pdf(item)">Ver Condiciones Particulares</button>
+        
+                </ion-col>
+              </div>
+
+              
             </ion-col>
           </ion-row>
     
@@ -547,25 +586,43 @@
 
     </ion-row>
 
+  </div>
+</ion-col>
+
+</ion-row>
 
 
 
-  </ion-grid>
+
+</ion-grid>
+</div>
+
 
   <!-- PASO 4 -->
-  <ion-grid class="container" *ngIf="estado4">
-    <div class="container">
-      <ion-row style="padding-left: 10px;padding-right: 10px; padding-top: 20px;">
-        <ion-col size-xs="12" size-md="12" size-xl="8.5" offset-xl="2.3" offset-md="0.75">
+  <div class="container" *ngIf="estado4">
+    <ion-grid  >
+      <ion-row style="padding-top: 20px;">
+        <ion-col size-xs="12" size-md="8" size-xl="6" offset-xl="3" offset-md="2">
+  
+  
+
+          <div class="secondary-background">
+
+      <ion-row >
+        <ion-col size-xs="12" size-md="12" size-xl="12">
 
           <ion-row>
-            <ion-col size="10" style="text-align: center; display: flex;justify-content: center; font-size: 30px;">
-              <ion-text>Información del titular</ion-text>
+            <ion-col size="12" style="text-align: center; display: flex;justify-content: center;">
+
+              <label  class="titulo"><strong >Información </strong>complementaria del titular </label>
+            
+              
+             
             </ion-col>
           </ion-row>
 
           <ion-row>
-            <ion-col size-xs="12" size-md="2.5" size-xl="2.5">
+            <ion-col size-xs="12" size-md="3" size-xl="3">
               <ion-label class="label">Cedula</ion-label>
 
               <ion-input [(ngModel)]="cedulaTitular" class="texto" type="number" disabled>
@@ -573,7 +630,7 @@
 
             </ion-col>
 
-            <ion-col size-xs="12" size-md="4" size-xl="4">
+            <ion-col size-xs="12" size-md="4.5" size-xl="5">
               <ion-label class="label">Nombres</ion-label>
 
 
@@ -583,7 +640,7 @@
             </ion-col>
 
 
-            <ion-col size-xs="12" size-md="4" size-xl="4">
+            <ion-col size-xs="12" size-md="4.5" size-xl="4">
               <ion-label class="label">Apellidos</ion-label>
 
 
@@ -608,7 +665,7 @@
 
 
 
-            <ion-col size-xs="12" size-md="2.5" size-xl="2.5">
+            <ion-col size-xs="12" size-md="3" size-xl="3">
               <ion-label class="label">Correo</ion-label>
 
 
@@ -618,7 +675,7 @@
 
             </ion-col>
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
+            <ion-col size-xs="12" size-md="2.75" size-xl="2.5">
               <ion-label class="label">Teléfono</ion-label>
 
 
@@ -627,7 +684,7 @@
 
             </ion-col>
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
+            <ion-col size-xs="12" size-md="2.75" size-xl="2.5">
               <ion-label class="label">Celular</ion-label>
 
 
@@ -637,7 +694,7 @@
             </ion-col>
 
 
-            <ion-col size-xs="12" size-md="4" size-xl="4">
+            <ion-col size-xs="12" size-md="3.5" size-xl="4">
 
               <ion-label class="label">Fecha de Nacimiento</ion-label>
 
@@ -658,10 +715,10 @@
 
 
 
-            <ion-col size-xs="12" size-md="2.5" size-xl="2.5">
+            <ion-col size-xs="12" size-md="3" size-xl="3">
 
               <ion-label class="label">Estado Civil</ion-label>
-              <ion-select [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
+              <ion-select [disabled]="estcivi" [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
                 style="border: 1px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px;"
                 [(ngModel)]="estadoTitular">
                 <ion-select-option *ngFor="let item of listaEstados" value="{{item}}">{{item}}</ion-select-option>
@@ -673,19 +730,38 @@
 
 
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
+            <ion-col size-xs="12" size-md="2.5" size-xl="2.5" *ngIf="estadoCiudadSelectable">
+             
               <ion-label class="label">Ciudad</ion-label>
 
 
-              <ionic-selectable [(ngModel)]="ciudad" [items]="ciudades" itemValueField="name" itemTextField="nombre"
+              <ionic-selectable  [(ngModel)]="ciudad" [items]="ciudades" itemValueField="name" itemTextField="nombre"
                 [canSearch]="true" searchPlaceholder="Ingresar una Ciudad" (onChange)="ciudadSelect($event) "
                 class="texto">
               </ionic-selectable>
 
+              
+
 
             </ion-col>
 
-            <ion-col size-xs="12" size-md="2" size-xl="2">
+            <ion-col size-xs="12" size-md="2.5" size-xl="2.5"  *ngIf="estadoCiudad" >
+              <ion-label class="label">Ciudad</ion-label>
+
+              <ion-select disabled [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
+              style="border: 1px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px;"
+              [(ngModel)]="ciudad">
+              <ion-select-option *ngFor="let item of ciudades" value="{{item.name}}">{{item.nombre}}</ion-select-option>
+            </ion-select>
+
+              
+
+              
+
+
+            </ion-col>
+
+            <ion-col size-xs="12" size-md="2.5" size-xl="2.5">
               <ion-label class="label">Provincia</ion-label>
 
 
@@ -703,7 +779,7 @@
 
 
 
-              <ion-input [(ngModel)]="direccionTitular" class="texto">
+              <ion-input  [(ngModel)]="direccionTitular" class="texto" [disabled]="estcivi">
               </ion-input>
             </ion-col>
 
@@ -714,52 +790,41 @@
         </ion-col>
       </ion-row>
     </div>
-
-
+  </ion-col>
+  
+  </ion-row>
+  
+  
+  
+  
   </ion-grid>
-
+  </div>
+  
 
   <!-- PASO 5 -->
-  <ion-grid class="container" *ngIf="estado5">
+  <div class="container" *ngIf="estado5">
+    <ion-grid  >
+      <ion-row style="padding-top: 20px;">
+        <ion-col size-xs="12" size-md="8" size-xl="6" offset-xl="3" offset-md="2">
+  
+  
 
-    <div class="example-data group">
-      <h5>Datos obtenidos del lightbox</h5>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="hint">Se mostrará la información que se obtiene del lightbox</div>
-          <pre id="lightbox-response"></pre>
-        </div>
-      </div>
-    </div>
-    
-    <div class="example-response group">
-
-      <ion-button (click)="llanarexterno()"></ion-button>
-     
-        
-    
-    </div>
-		
-
-    <button ion-fab="" onclick="window.open('https://checkout-test.placetopay.ec/session/553943/b8014a87b2b40a187bc7d942d166b5e7','_system','location=yes')"><ion-icon name="logo-facebook"></ion-icon></button>
-
-
-   
-
-
-    
-
+          <div class="secondary-background">
+            <ion-row>
+              <ion-col size="12">
+          
+                <label  class="titulo">A un paso de <strong >Finalizar</strong> la cotización</label>
+                <br>
+                <label  class="subtitulo">Elija un frecuencia de pago</label>
+              </ion-col>
+            </ion-row>
 
     <div class="container">
-      <ion-row style="padding-top: 20px;">
-        <ion-col size-xs="12" size-md="12" size-xl="8" offset-xl="2.2">
+      <ion-row>
+        <ion-col size-xs="12" size-md="12" size-xl="12" >
 
-          <ion-row>
-            <ion-col size-xs="4" size-md="4" size-xl="4"
-              style="text-align: right; display: flex;justify-content: right; font-size: 20px;">
-              <ion-label>Frecuencia de Pago</ion-label>
-            </ion-col>
-
+          <ion-row style="text-align: center; display:flex;justify-content: center;">
+ 
             <ion-col size-xs="6" size-md="4" size-xl="3">
               <ion-select [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
                 (ionChange)="labelFrecuencia($event)"
@@ -773,8 +838,8 @@
 
 
           <ion-row>
-            <ion-col size="12" style="text-align: center; display: flex;justify-content: center; font-size: 30px;">
-              <ion-text>Resumen</ion-text>
+            <ion-col size="12" style="text-align: center; display: flex;justify-content: center; font-size: 25px;">
+              <ion-text class="subtitulo">Resumen de pago</ion-text>
             </ion-col>
           </ion-row>
 
@@ -786,16 +851,15 @@
 
       <ion-row>
 
-        <ion-col size-xs="12" size-md="3" size-xl="2.5" style="border: 1px solid  #001b83 !important;" offset-xl="2.2"
-          offset-md="1.5">
+        <ion-col size-xs="12" size-md="4" size-xl="4" style="border: 1px solid  #001b83 !important;">
 
 
           <ion-row>
 
-            <ion-col size-xs="6" size-md="7" size-xl="7" style="font-size: 15px;">
+            <ion-col size-xs="6" size-md="5" size-xl="6" style="font-size: 15px;">
               <ion-label>Prima ({{nombrePrima}}):</ion-label>
             </ion-col>
-            <ion-col size-xs="6" size-md="5" size-xl="5">
+            <ion-col size-xs="6" size-md="7" size-xl="6">
 
               <label style="background: #dcdcdd7a;font-size: 20px;"> $ {{primamensual}}</label>
             </ion-col>
@@ -804,26 +868,26 @@
 
 
         </ion-col>
-        <ion-col size-xs="12" size-md="3" size-xl="2.5" style="border: 1px solid  #001b83 !important;">
+        <ion-col size-xs="12" size-md="4.5" size-xl="5" style="border: 1px solid  #001b83 !important;">
           <ion-row>
 
-            <ion-col size-xs="6" size-md="8" size-xl="8">
+            <ion-col size-xs="6" size-md="7" size-xl="6.5">
               <ion-label>Impuestos y Contribuciones:</ion-label>
             </ion-col>
-            <ion-col size-xs="6" size-md="4" size-xl="4">
+            <ion-col size-xs="6" size-md="5" size-xl="5.5">
 
               <label style="background: #dcdcdd7a;font-size: 20px;">$ {{impuestos}}</label>
             </ion-col>
           </ion-row>
 
         </ion-col>
-        <ion-col size-xs="12" size-md="3" size-xl="2.5" style="border: 1px solid  #001b83 !important;">
+        <ion-col size-xs="12" size-md="3" size-xl="3" style="border: 1px solid  #001b83 !important;">
           <ion-row>
 
-            <ion-col size-xs="6" size-md="5" size-xl="4">
+            <ion-col size-xs="6" size-md="4" size-xl="4">
               <ion-label>Total:</ion-label>
             </ion-col>
-            <ion-col size-xs="6" size-md="6" size-xl="5">
+            <ion-col size-xs="6" size-md="8" size-xl="8">
 
 
               <label style="background: #dcdcdd7a;font-size: 20px;">$ {{total}}</label>
@@ -842,16 +906,16 @@
     </div>
 
     <ion-grid>
-      <div>
-        <ion-row>
-          <ion-col size-xs="12" size-md="7.5" size-xl="12" offset-md="2.5">
+      <div style="text-align: center; display: flex;justify-content: center;">
+        <ion-row style="text-align: center;">
+          <ion-col style="text-align: center;" size-xs="12" size-md="12" size-xl="12" >
             <ion-row>
 
-              <ion-col size-xs="12" size-md="6" size-xl="2.5" offset-xl="2.5" offset-md="2.5">
+              <ion-col size-xs="12" size-md="12" size-xl="12">
 
 
 
-                <ion-label class="label">Cuenta usted con un broker:</ion-label>
+                <ion-label class="label">Cuenta usted con un broker</ion-label>
                 <ion-select [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
                   (ionChange)="cuentaconBroker($event)"
                   style="border: 0.5px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px;"
@@ -865,8 +929,8 @@
               </ion-col>
 
             </ion-row>
-            <ion-row>
-              <ion-col *ngIf="estadobroker==true" size-xs="12" size-md="8" size-xl="4" offset-xl="1.5" offset-md="1.5">
+            <ion-row style="text-align: center; display: flex;justify-content: center;">
+              <ion-col *ngIf="estadobroker==true" size-xs="12" size-md="12" size-xl="12">
                 <ion-label class="label">Seleccione un broker:</ion-label>
 
 
@@ -888,10 +952,16 @@
       </div>
     </ion-grid>
 
+  </div>
+</ion-col>
+
+</ion-row>
 
 
-  </ion-grid>
 
+
+</ion-grid>
+</div>
 
   <!-- BOTONES -->
 
@@ -906,10 +976,10 @@
             <ion-col size-xs="12" size-md="8" size-xl="8" offset-xl="2" offset-md="2">
 
               <ion-item class="center" lines="none">
-                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 8px;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;" color="warning"
                   class="center" id="atras" (click)="clickatras($event)" disabled>Atras
                 </ion-button>
-                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 8px;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;" color="warning"
                   class="center" id="siguiente" (click)="clicksiguiente($event)">Siguiente
                 </ion-button>
 
@@ -938,10 +1008,10 @@
             <ion-col size-xs="12" size-md="8" size-xl="8" offset-xl="2" offset-md="2">
 
               <ion-item class="center" lines="none">
-                <ion-button style="height: 100%; width: 100%; color: black;  border-radius: 50%;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black;  border-radius: 50%;  --border-radius: 20px;" color="warning"
                   class="center" id="atras" (click)="clickatras($event)" disabled>Atras
                 </ion-button>
-                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 50%;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 50%;  --border-radius: 20px;" color="warning"
                   class="center" id="siguiente" (click)="guardar()">Proceder al Pago
                 </ion-button>
               </ion-item>
@@ -953,6 +1023,35 @@
         </ion-col>
       </ion-row>
     </div>
+
+  </ion-grid>
+
+  <ion-grid class="container" *ngIf="estadoPago" >
+
+<ion-row  style="text-align: center; display: flex;justify-content: center;" >
+  <ion-col  size-xs="12" size-md="8" size-xl="8"   class="secondary-background md hydrated">
+    <ion-row >
+      <ion-col size="12">
+        <img  src="assets/images/cot_robot.png" class="img_robot">
+      </ion-col>
+    </ion-row> &nbsp;&nbsp;<label class="titulo">
+      <strong >Pago Generado &nbsp;</strong>
+      <ion-icon  name="checkmark-circle" style="color: #f9b727;" role="img" class="md hydrated" aria-label="checkmark circle">
+      </ion-icon>
+    </label><br> &nbsp;&nbsp;<label class="subtitulo">
+      <ion-icon  name="mail-outline" style="color: #001b83;" role="img" class="md hydrated" aria-label="mail outline">
+      </ion-icon>&nbsp;Revise su correo para acceder a la informacion. </label><br ><br>
+      <ion-row >
+   
+        <ion-col  size="12" class="md hydrated" >
+          <button (click)="nuevaCotizacion()" class="btn btn--primary">Nueva Cotización
+           
+          </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-col>
+  </ion-row>
 
   </ion-grid>
 

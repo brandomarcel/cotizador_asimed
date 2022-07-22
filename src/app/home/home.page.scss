@@ -6,6 +6,7 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+
 }
 
 #container strong {
@@ -124,6 +125,9 @@ font-weight: bold;
   }
 }
 
+.fondologin{
+  background-color: #111D12!important;
+}
 
 
 
@@ -178,13 +182,13 @@ font-weight: bold;
   align-content: center;
   align-items: center;
   width: 100%;
-  background: #e7e7e78c;
+  background: #ffffff;
 }
 
 .texto{
 
-border: 1px solid  #001b83 !important;
-background: #e7e7e78c;
+border: 1px solid rgba(0,27,131,.5450980392156862);
+//background: #e7e7e78c;
 text-transform: uppercase;
 height: 43px;
 }
@@ -223,4 +227,46 @@ height: 43px;
 .cardBajoCabecera {
   background-color: #001b83;
  
+}
+
+//PAGO FINAL
+.strong {
+  font-weight: 700;
+}
+
+.subtitulo, .titulo {
+  font-family: Montserrat,sans-serif;
+  text-align: left;
+  color: #001b83;
+}
+
+.titulo {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.btn {
+  padding: 14px 40px;
+  border-radius: 20px;
+  font-size: small;
+  border: 0;
+  text-decoration: none;
+  transition: all .4s;
+  margin-left: 10px;
+  width: 230px;
+}
+
+.btn--primary {
+  background-color: #001b83;
+  color: #fff;
+}
+
+
+.secondary-background {
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.centrardivs{
+  text-align: center;
 }

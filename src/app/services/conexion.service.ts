@@ -1,16 +1,19 @@
+import { CobrarCuotas } from './../entidades/cobrar-cuotas';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Registro } from '../entidades/registro';
 import { Observable } from 'rxjs';
 import { Validar } from '../entidades/validar';
+import { ProseSubsc } from '../entidades/prose-subsc';
+import { RegisSubs } from '../entidades/regis-subs';
 
-environment
 @Injectable({
   providedIn: 'root'
 })
 export class ConexionService {
   private apiUrl = environment.apiUrl
+  private autorization= environment.autorization
   constructor(private httpClient:HttpClient) { }
 
   login(user,pass) {
@@ -95,10 +98,42 @@ export class ConexionService {
   
     return this.httpClient.post(url, datos, { headers:  { 'Content-Type': 'application/json'} });
   }
-
-  guardarSuscripcion() {
-    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/guardarSuscripcion/{1722195755}/{123}';
-    return this.httpClient.get( url, { headers: { 'Content-Type': 'application/json' ,'Authorization':'Basic YXNpc3RtZWQ6QXNpc3RNM2QuMjAyMQ=='},responseType: 'json', });
+  
+  guardarSuscripcion(identificacion:any,asismed:any) {
+    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/guardarSuscripcion/'+identificacion+'/'+asismed+'';
+    return this.httpClient.get( url, { headers: { 'Content-Type': 'application/json' ,'Authorization':this.autorization},responseType: 'json', });
   }
+
+  registrarSuscripcion(datos:RegisSubs){
+    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/registrarSuscripcion';
+
+    console.log(datos)
+    return this.httpClient.post( url,datos, { headers: { 'Content-Type': 'application/json','Authorization':this.autorization},responseType: 'json', });
+  }
+
+  procesarSuscripcion(datos:ProseSubsc){
+    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/procesarSuscripcion';
+
+    console.log(datos)
+    return this.httpClient.post( url,datos, { headers: { 'Content-Type': 'application/json','Authorization':this.autorization},responseType: 'text', });
+  }
+
+  getTarjetaPorIdentificacion(identificacion:any){
+    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/getTarjetaPorIdentificacion/'+identificacion+'';
+
+  
+    return this.httpClient.get( url, { headers: { 'Content-Type': 'application/json','Authorization':this.autorization},responseType: 'json', });
+  }
+
+  cobrarCuotasRecurrentesAsismed(cobros:CobrarCuotas){
+    let url = 'https://devapp.sweadenseguros.com:8083/cobranzasService/cobrarCuotasRecurrentesAsismed';
+let datos=[cobros]
+
+console.log(datos)
+  
+    return this.httpClient.post( url,datos,{ headers: { 'Content-Type': 'application/json','Authorization':this.autorization},responseType: 'json', });
+  }
+  
+
 
 }
