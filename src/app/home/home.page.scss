@@ -162,6 +162,10 @@ font-weight: bold;
   padding-left: 20px;
 }
 .texto{
+  border: 1px solid rgba(0,27,131,.5450980392156862);
+//background: #e7e7e78c;
+text-transform: uppercase;
+
   color: #17202A;
   font-size: 15px;
   font-weight: bold;
@@ -185,13 +189,7 @@ font-weight: bold;
   background: #ffffff;
 }
 
-.texto{
 
-border: 1px solid rgba(0,27,131,.5450980392156862);
-//background: #e7e7e78c;
-text-transform: uppercase;
-height: 43px;
-}
 .label{
   //padding-left: 20px;
    color: #001b83;
@@ -269,4 +267,13 @@ height: 43px;
 
 .centrardivs{
   text-align: center;
+}
+
+.master_css h1 {
+  font-weight: 500;
+  color: #001b83;
+  text-align: left;
+}
+b, strong {
+  font-weight: 900;
 }

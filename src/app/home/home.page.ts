@@ -7,7 +7,7 @@ import { Registro } from '../entidades/registro';
 import { Validar } from '../entidades/validar';
 import { ProseSubsc, Respuesta, Status } from '../entidades/prose-subsc';
 import { formatDate } from "@angular/common";
-import { RegisSubs,Subscription } from '../entidades/regis-subs';
+import { RegisSubs, Subscription } from '../entidades/regis-subs';
 
 
 declare var externo;
@@ -21,18 +21,18 @@ declare var h;
 export class HomePage {
 
 
-eliminarLocalstorage(){
-  localStorage.removeItem("_doctype:User");
-  localStorage.removeItem("customize_doctype");
-  localStorage.removeItem("_last_load");
-  localStorage.removeItem("page_info");
-  localStorage.removeItem("kento_carga_masiva_needs_to_reload");
-  localStorage.removeItem("current_workspace");
-  localStorage.removeItem("_version_number");
-  localStorage.removeItem("metadata_version");
-  localStorage.removeItem("_doctype:Entidades");
-  
-}
+  eliminarLocalstorage() {
+    localStorage.removeItem("_doctype:User");
+    localStorage.removeItem("customize_doctype");
+    localStorage.removeItem("_last_load");
+    localStorage.removeItem("page_info");
+    localStorage.removeItem("kento_carga_masiva_needs_to_reload");
+    localStorage.removeItem("current_workspace");
+    localStorage.removeItem("_version_number");
+    localStorage.removeItem("metadata_version");
+    localStorage.removeItem("_doctype:Entidades");
+
+  }
 
   llanarexterno(url) {
 
@@ -40,7 +40,7 @@ eliminarLocalstorage(){
       this.probando();
     }, 5000);
 
-   
+
     externo(url);
     guardado();
 
@@ -61,16 +61,16 @@ eliminarLocalstorage(){
 
         this.reference = res;
 
-this.registrarSuscripcion();
-loading.dismiss();
+        this.registrarSuscripcion();
+        loading.dismiss();
 
       } else {
         console.log("algo paso ")
       }
-    },error =>{
+    }, error => {
       console.error(error)
-this.alertError("Error","Error de conexion vuelva a intentarlo...")
-loading.dismiss();
+      this.alertError("Error", "Error de conexion vuelva a intentarlo...")
+      loading.dismiss();
 
     });
 
@@ -79,7 +79,7 @@ loading.dismiss();
   }
 
 
- 
+
 
   probando() {
     this.alertPagoTarjeta();
@@ -90,11 +90,14 @@ loading.dismiss();
     cssClass: 'customAlertCss',
 
   };
-  estcivi:boolean=true;
-  estadoCiudad:boolean;
-  estadoCiudadSelectable:boolean;
-  estadoPago=false;
-  reference:any;
+
+  principal: boolean=true;
+  principal2: boolean=false;
+  estcivi: boolean = true;
+  estadoCiudad: boolean;
+  estadoCiudadSelectable: boolean;
+  estadoPago = false;
+  reference: any;
   proseSubsc: ProseSubsc;
   respuesta: Respuesta;
   status: Status;
@@ -102,8 +105,8 @@ loading.dismiss();
   identificacion: any;
   asismed: any;
 
-  regisSubs:RegisSubs;
-  subscription:Subscription;
+  regisSubs: RegisSubs;
+  subscription: Subscription;
 
   cobrarCuotas: CobrarCuotas
   cobros: Cobros
@@ -150,7 +153,7 @@ loading.dismiss();
   num2: any;
   colorButon: any;
   color: any;
-  cuentabroker: any;
+  cuentabroker: any = "";
   nombrePrima: any = "Mensual";
   parentesco1: any = "TITULAR";
   conteoBeneficiarios: any = "";
@@ -168,12 +171,12 @@ loading.dismiss();
 
   tresDatos: boolean;
   statusRegSus: any;
-  tajetaIden:any;
+  tajetaIden: any;
 
   buttonIcon: string = "md-add";
   color1: string = "black";
   format2 = 'yyyy-MM-ddTHH:mm:ss-05:00';
-  expiration:any;
+  expiration: any;
   //words2 = [{edad:"",genero:"",parentesco:""}];
   words2: any = [];
   parentescos: any = ["CONYUGE", "HERMANO(A)", "HIJO(A)", "SUEGRO(A)"];
@@ -181,16 +184,17 @@ loading.dismiss();
   listaEstados: any = ["CASADO(A)", "DIVORCIADO(A)", "SOLTERO(A)", "UNIÓN LIBRE", "UNIÓN DE HECHO", "VIUDO(A)"];
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = [{name:"Datos",icono:"person"}, {name:"Beneficiarios",icono:"people"}, {name:"Plan",icono:"reader"},
-    {name:"Información",icono:"newspaper"}, {name:"Finalizar",icono:"checkmark-circle-sharp"}];
- 
+  public counts = [{ name: "Datos", icono: "person" }, { name: "Beneficiarios", icono: "people" }, { name: "Plan", icono: "reader" },
+  { name: "Información", icono: "newspaper" }, { name: "Finalizar", icono: "checkmark-circle-sharp" }];
+
   public orderStatus = "Datos"
 
   sig = document.getElementById("siguiente");
   constructor(private conexionService: ConexionService, private loadingController: LoadingController,
     private alertController: AlertController, private modalController: ModalController) { }
   ngOnInit() {
-    console.log(this.counts)
+
+
     this.eliminarLocalstorage();
 
 
@@ -200,9 +204,9 @@ loading.dismiss();
     this.color = "asdfasdfaa"
     this.listaEdades = "";
     this.estado1 = true;
-   
 
-  
+
+
     this.atras = true;
 
     this.getEdades();
@@ -235,6 +239,23 @@ loading.dismiss();
       return false;
     }
   }
+
+  validarFecha(valor) {
+
+    console.log(valor)
+    var val = formatDate(valor, 'dd/MM/yyyy', 'en-US');
+    console.log(val)
+    if ((/^(?:(?:(?:0?[1-9]|1\d|2[0-8])[/](?:0?[1-9]|1[0-2])|(?:29|30)[/](?:0?[13-9]|1[0-2])|31[/](?:0?[13578]|1[02]))[/](?:0{2,3}[1-9]|0{1,2}[1-9]\d|0?[1-9]\d{2}|[1-9]\d{3})|29[/]0?2[/](?:\d{1,2}(?:0[48]|[2468][048]|[13579][26])|(?:0?[48]|[13579][26]|[2468][048])00))$/).test(val)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  continuarPrincipal() {
+  this.principal2 = true;
+  this.principal = false;
+  }
   getEdades() {
     this.listaEdades = "";
     this.conexionService.getEdades().subscribe(data => {
@@ -256,6 +277,9 @@ loading.dismiss();
       } else {
         this.tresDatos = false;
       }
+
+
+
 
     }, error => {
       console.log(error);
@@ -291,9 +315,9 @@ loading.dismiss();
       temp = result["message"];
       // console.log(temp.length);
       this.ciudades = temp
-       console.log(this.ciudades)
+      console.log(this.ciudades)
     }, error => {
-      this.alertError("Error","Error de conexion..");
+      this.alertError("Error", "Error de conexion..");
       console.log(error);
     });
 
@@ -350,6 +374,9 @@ loading.dismiss();
         var email = this.validarEmail(String(this.correo1))
         var edad = this.calculoEdad(this.fechanacTitular)
 
+        var fecha = this.validarFecha(this.fechanacTitular);
+      
+
 
         if (edad >= 0 && edad <= 17) {
           this.edad1 = "0-17";
@@ -392,8 +419,9 @@ loading.dismiss();
         console.log(this.edad1)
         console.log(email)
         console.log(ced)
-        if (ced == true && email == true) {
-         
+        console.log(fecha)
+        if (ced == true && email == true && fecha == true) {
+
           //console.log(variableOne);
 
           this.update();
@@ -406,6 +434,10 @@ loading.dismiss();
         else if (email == false) {
           this.currentactive--;
           this.alertError("Alerta!", 'Ingrese un correo valido');
+        }else if(fecha == false){
+          this.currentactive--;
+          this.alertError("Alerta!", 'Ingrese una fecha valida');
+        
         }
 
       }
@@ -683,14 +715,14 @@ loading.dismiss();
     this.registro.fecha_nac = this.fechanacTitular;
     this.registro.rango_edad = this.edad1;
     this.registro.provincia = this.provinciaTitular;
-    if(this.ciudad.name == undefined){
+    if (this.ciudad.name == undefined) {
       console.log("undefined")
       this.registro.ciudad = this.ciudad;
-    }else{
+    } else {
       console.log("name")
       this.registro.ciudad = this.ciudad.name;
     }
-    
+
     this.registro.direccion = this.direccionTitular;
     this.registro.telefono = String(this.telefono1);
     this.registro.celular = String(this.celular1);
@@ -754,15 +786,25 @@ loading.dismiss();
     var cedula = $event.target.value;
     console.log(cedula.length)
 
+    if (cedula.length == 0) {
+      this.nombre1 = "";
+      this.apellido1 = "";
+      this.fechanacTitular = "";
+      this.genero1 = "";
+      this.celular1 = "";
+      this.correo1 = "";
+      this.telefono1 = "";
+      this.ciudad = ""
+    }
     if (cedula.length == 10) {
 
       var cedvalida = this.validadorDeCedula(cedula);
 
       console.log("realizar consulta")
       console.log(cedvalida)
-      const variableOne="";
+      const variableOne = "";
       if (cedvalida == true) {
-        
+
         this.nombre1 = "";
         this.apellido1 = "";
         this.fechanacTitular = "";
@@ -770,8 +812,8 @@ loading.dismiss();
         this.celular1 = "";
         this.correo1 = "";
         this.telefono1 = "";
-        this.ciudad=""
-        
+        this.ciudad = ""
+
         const loading = await this.loadingController.create({ message: 'Consultando ...' })
         await loading.present();
 
@@ -780,7 +822,7 @@ loading.dismiss();
           var persona = res.message
 
           if (persona == false) {
-            this.estcivi=false;
+            this.estcivi = false;
             this.nombre1 = "";
             this.apellido1 = "";
             this.fechanacTitular = "";
@@ -788,82 +830,91 @@ loading.dismiss();
             this.celular1 = "";
             this.correo1 = "";
             this.telefono1 = "";
-            this.ciudad="";
-            this.provinciaTitular="";
-            this.direccionTitular="";
-            this.estadoTitular="";
+            this.ciudad = "";
+            this.provinciaTitular = "";
+            this.direccionTitular = "";
+            this.estadoTitular = "";
             document.getElementById("nombre1")["disabled"] = false;
             document.getElementById("apellido1")["disabled"] = false;
-           // document.getElementById("fechanacTitular")["disabled"] = false;
+            // document.getElementById("fechanacTitular")["disabled"] = false;
             document.getElementById("genero1")["disabled"] = false;
             document.getElementById("celular1")["disabled"] = false;
             document.getElementById("correo1")["disabled"] = false;
             document.getElementById("telefono1")["disabled"] = false;
-            this.estadoCiudadSelectable=true;
-            this.estadoCiudad=false;
-           
+            this.estadoCiudadSelectable = true;
+            this.estadoCiudad = false;
+
             //document.getElementById("correo1")["disabled"] = false;
             //document.getElementById("telefono1")["disabled"] = false;
           } else {
-            this.estcivi=true;
+            this.estcivi = true;
             console.log(persona[0])
             console.log(this.ciudades)
-           const variableOne = this.ciudades.filter((itemInArray => (itemInArray.name===persona[0].localidad))  )
-           
+            const variableOne = this.ciudades.filter((itemInArray => (itemInArray.name === persona[0].localidad)))
+
             console.log(variableOne)
             //console.log(variableOne[0].name)
             //this.ciudades = variableOne;
             this.ciudad = variableOne[0].name;
-            this.estadoCiudadSelectable=false;
-            this.estadoCiudad=true;
+            this.estadoCiudadSelectable = false;
+            this.estadoCiudad = true;
             this.provinciaTitular = variableOne[0].provincia;
             this.nombre1 = persona[0].nombres;
             this.apellido1 = persona[0].apellidos;
             this.fechanacTitular = persona[0].fecha_nac;
-            this.direccionTitular=persona[0].direccion;
-            this.estadoTitular=persona[0].estado_civil;
+            this.direccionTitular = persona[0].direccion;
+            this.estadoTitular = persona[0].estado_civil;
 
+            var email = this.validarEmail(String(persona[0].correo))
 
-            if(persona[0].genero == "" || persona[0].genero == "Sociedades" || persona[0].genero == "CIAS DE SEGUROS" ){
+            if (persona[0].genero == "" || persona[0].genero == "Sociedades" || persona[0].genero == "CIAS DE SEGUROS") {
               document.getElementById("genero1")["disabled"] = false;
-            }else{
+            } else {
               this.genero1 = persona[0].genero;
               document.getElementById("genero1")["disabled"] = true;
             }
-          
-         
-            if(persona[0].telefono_cel == "" ){
+
+
+            if (persona[0].telefono_cel == "") {
               //document.getElementById("celular1")["disabled"] = false;
-            }else{
-              this.celular1 ="0"+ persona[0].telefono_cel;
+            } else {
+              this.celular1 = "0" + persona[0].telefono_cel;
               //document.getElementById("celular1")["disabled"] = true;
             }
-         
-            if(persona[0].correo == "" ){
-               document.getElementById("correo1")["disabled"] = false;
-            }else{
+
+            if (persona[0].correo == "") {
+              document.getElementById("correo1")["disabled"] = false;
+            } else {
               this.correo1 = persona[0].correo;
               document.getElementById("correo1")["disabled"] = true;
             }
-            if(persona[0].telefono_dom == "" ){
+            if (persona[0].telefono_dom == "") {
               //document.getElementById("telefono1")["disabled"] = false;
-            }else{
-              this.telefono1= "0"+persona[0].telefono_dom;
+            } else {
+              this.telefono1 = "0" + persona[0].telefono_dom;
               //document.getElementById("telefono1")["disabled"] = true;
             }
-          
+
             document.getElementById("nombre1")["disabled"] = true;
             document.getElementById("apellido1")["disabled"] = true;
             //document.getElementById("fechanacTitular")["disabled"] = true;
-         
-         
-          
-           
-         
+            console.log(email)
+            if (email == false) {
+              console.log(true)
+              this.alertError("Alerta!", "El correo electronico no es valido contactarse con soporte");
+              (<HTMLSelectElement>document.getElementById("siguiente")).disabled = true;
+
+            } else {
+              (<HTMLSelectElement>document.getElementById("siguiente")).disabled = false;
+            }
 
 
           }
           loading.dismiss();
+        }, error => {
+          console.log(error)
+          loading.dismiss();
+          this.alertError("Alerta!", "Error de conexión");
         })
 
       } else if (cedvalida == false) {
@@ -877,18 +928,6 @@ loading.dismiss();
 
     }
 
-
-    /* var hoy = new Date();
-    var cumpleanos = new Date(fecha);
-    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-    var m = hoy.getMonth() - cumpleanos.getMonth();
-
-    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-      edad--;
-    }
-    console.log(edad)
-
-    return edad; */
 
   }
 
@@ -957,7 +996,7 @@ loading.dismiss();
 
     await alert.present();
   }
-  
+
   async alertPagoTarjeta() {
 
     const alert = await this.alertController.create({
@@ -971,34 +1010,34 @@ loading.dismiss();
         cssClass: 'secondary',
 
         handler: (blah) => {
-         
+
           var status = JSON.parse(sessionStorage.getItem("status"));
           console.log(status)
           console.log(status.status)
           this.statusRegSus = status;
           sessionStorage.removeItem("status");
-          
 
-          if(status){
 
-          if (status.status.status == "APPROVED") {
-            console.log("APPROVED")
-            this.cobroTarjeta();
+          if (status) {
 
-          } else if (status.status.status == "REJECTED") {
-            //this.cobroTarjeta();
-            console.log("REJECTED")
-            this.cancelarPago("Transaccion cancelada");
+            if (status.status.status == "APPROVED") {
+              console.log("APPROVED")
+              this.cobroTarjeta();
 
-          } else if (status.status.status == "RECHAZADO") {
-            this.cancelarPago("Transaccion rechazada...");
+            } else if (status.status.status == "REJECTED") {
+              //this.cobroTarjeta();
+              console.log("REJECTED")
+              this.cancelarPago("Transaccion cancelada");
+
+            } else if (status.status.status == "RECHAZADO") {
+              this.cancelarPago("Transaccion rechazada...");
+            }
+
+          } else {
+            this.alertError("Error", "Intente Nuevamente...");
+
           }
 
-        }else{
-        this.alertError("Error","Intente Nuevamente...");
-
-        }
-          
 
 
 
@@ -1011,7 +1050,7 @@ loading.dismiss();
   }
 
 
-  async cancelarPago(mensaje){
+  async cancelarPago(mensaje) {
 
     const loading = await this.loadingController.create({ message: mensaje })
     await loading.present();
@@ -1022,7 +1061,7 @@ loading.dismiss();
 
   }
 
-  async registrarSuscripcion(){
+  async registrarSuscripcion() {
     const loading = await this.loadingController.create({ message: 'Realizando Petición ...' })
     await loading.present();
     var fecha = new Date();
@@ -1033,7 +1072,7 @@ loading.dismiss();
     var soloFecha = formatDate((fecha.getTime()), this.format2, 'en-US');
     this.expiration = soloFecha;
 
-    
+
     console.log(this.expiration)
 
 
@@ -1047,28 +1086,28 @@ loading.dismiss();
     this.buyer.mobile = this.celular1;
 
     this.subscription = new Subscription()
-    this.subscription.reference=this.reference;
-    this.subscription.descripcion='COT_'+this.cedulaTitular+'';
+    this.subscription.reference = this.reference;
+    this.subscription.descripcion = 'COT_' + this.cedulaTitular + '';
 
     this.regisSubs = new RegisSubs();
-    this.regisSubs.auth= null;
-    this.regisSubs.locale= "es_EC";
-    this.regisSubs.buyer=this.buyer;
-    this.regisSubs.subscription= this.subscription;
-    this.regisSubs.expiration= this.expiration;
-    this.regisSubs.ipAddress= "0:0:0:0:0:0:0:1";
-    this.regisSubs.userAgent= "webkit";
-    this.regisSubs.returnUrl= "https://dnetix.co/p2p/client";
-    this.regisSubs.cancelUrl= "https://dnetix.co";
-    this.regisSubs.skipResult= true;
-    this.regisSubs.noBuyerFill= false;
-    this.regisSubs.captureAddress= false;
-    this.regisSubs.paymentMethod= null;
+    this.regisSubs.auth = null;
+    this.regisSubs.locale = "es_EC";
+    this.regisSubs.buyer = this.buyer;
+    this.regisSubs.subscription = this.subscription;
+    this.regisSubs.expiration = this.expiration;
+    this.regisSubs.ipAddress = "0:0:0:0:0:0:0:1";
+    this.regisSubs.userAgent = "webkit";
+    this.regisSubs.returnUrl = "https://dnetix.co/p2p/client";
+    this.regisSubs.cancelUrl = "https://dnetix.co";
+    this.regisSubs.skipResult = true;
+    this.regisSubs.noBuyerFill = false;
+    this.regisSubs.captureAddress = false;
+    this.regisSubs.paymentMethod = null;
 
     console.log(this.regisSubs)
 
 
-    this.conexionService.registrarSuscripcion(this.regisSubs).subscribe(res=>{
+    this.conexionService.registrarSuscripcion(this.regisSubs).subscribe(res => {
       console.log(res["processUrl"])
 
       loading.dismiss();
@@ -1135,19 +1174,11 @@ loading.dismiss();
       } else if (res == 'RECHAZADO') {
         loading.dismiss();
 
-        this.alertError("Error!","Alguno de los parámetros de la tarjeta estuvo mal ingresado o hay algún problema en la tarjeta")
-        
+        this.alertError("Error!", "Alguno de los parámetros de la tarjeta estuvo mal ingresado o hay algún problema en la tarjeta")
+
       }
 
     });
-
-
-
-    /*    this.conexionService.validarDatos(this.validar).subscribe(res => {
-         console.log(res)
-         loading.dismiss();
-         this.alertExito("Pago Realizado", 'Revise su correo para acceder a la informacion');
-       }) */
   }
 
   async getTarjetaPorIdentificacion() {
@@ -1157,14 +1188,14 @@ loading.dismiss();
     this.conexionService.getTarjetaPorIdentificacion(this.cedulaTitular).subscribe(res => {
       console.log(res)
 
-      this.tajetaIden=res;
+      this.tajetaIden = res;
 
 
       if (res != "") {
         loading.dismiss();
         this.cobrarCuotasRecurrentesAsismed();
 
-      }else{
+      } else {
 
         console.log("ERROR getTarjetaPorIdentificacion")
       }
@@ -1173,8 +1204,8 @@ loading.dismiss();
 
   async cobrarCuotasRecurrentesAsismed() {
 
-console.log( this.tajetaIden)
-   
+    console.log(this.tajetaIden)
+
 
     this.token = new Token();
     this.token.token = this.tajetaIden.token;
@@ -1193,83 +1224,83 @@ console.log( this.tajetaIden)
     this.payment.description = "Cotizador compra";
 
     this.buyer = new Buyer();
-   
-    if(this.tajetaIden.buyer.document){
+
+    if (this.tajetaIden.buyer.document) {
       this.buyer.document = this.tajetaIden.buyer.document;
-    }else{
+    } else {
       this.buyer.mobile = null;
     }
-    
-    if(this.tajetaIden.buyer.name){
+
+    if (this.tajetaIden.buyer.name) {
       this.buyer.name = this.tajetaIden.buyer.name;
-    }else{
+    } else {
       this.buyer.name = null;
     }
- 
-    if(this.tajetaIden.buyer.surname){
+
+    if (this.tajetaIden.buyer.surname) {
       this.buyer.surname = this.tajetaIden.buyer.surname;
-    }else{
+    } else {
       this.buyer.surname = null;
     }
-   
-    if(this.tajetaIden.buyer.email){
+
+    if (this.tajetaIden.buyer.email) {
       this.buyer.email = this.tajetaIden.buyer.email;
-    }else{
+    } else {
       this.buyer.email = null;
     }
-    
-    if(this.tajetaIden.buyer.documentType){
+
+    if (this.tajetaIden.buyer.documentType) {
       this.buyer.documentType = this.tajetaIden.buyer.documentType;
-    }else{
+    } else {
       this.buyer.documentType = null;
     }
-  
-    if(this.tajetaIden.buyer.mobile){
+
+    if (this.tajetaIden.buyer.mobile) {
       this.buyer.mobile = this.tajetaIden.buyer.mobile;
-    }else{
+    } else {
       this.buyer.mobile = "9999999999";
     }
-   
+
 
     this.payer = new Payer();
 
-        if(this.tajetaIden.payer.document){
+    if (this.tajetaIden.payer.document) {
       this.payer.document = this.tajetaIden.payer.document;
-    }else{
+    } else {
       this.payer.mobile = null;
     }
-    
-    if(this.tajetaIden.payer.name){
+
+    if (this.tajetaIden.payer.name) {
       this.payer.name = this.tajetaIden.payer.name;
-    }else{
+    } else {
       this.payer.name = null;
     }
- 
-    if(this.tajetaIden.payer.surname){
+
+    if (this.tajetaIden.payer.surname) {
       this.payer.surname = this.tajetaIden.payer.surname;
-    }else{
+    } else {
       this.payer.surname = null;
     }
-   
-    if(this.tajetaIden.payer.email){
+
+    if (this.tajetaIden.payer.email) {
       this.payer.email = this.tajetaIden.payer.email;
-    }else{
+    } else {
       this.payer.email = null;
     }
-    
-    if(this.tajetaIden.payer.documentType){
+
+    if (this.tajetaIden.payer.documentType) {
       this.payer.documentType = this.tajetaIden.payer.documentType;
-    }else{
+    } else {
       this.payer.documentType = null;
     }
-  
-    if(this.tajetaIden.payer.mobile){
+
+    if (this.tajetaIden.payer.mobile) {
       this.payer.mobile = this.tajetaIden.payer.mobile;
-    }else{
+    } else {
       this.payer.mobile = "9999999999";
     }
-   
-    
+
+
 
     this.cobrarCuotas = new CobrarCuotas();
     this.cobrarCuotas.auth = null;
@@ -1295,11 +1326,11 @@ console.log( this.tajetaIden)
         console.log("APPROVED")
         loading.dismiss();
         this.guardaKyana();
-        
+
       } else {
         loading.dismiss();
         console.error(res[0].payment[0].status.status)
-        this.alertError("Error","Error en la transaccion")
+        this.alertError("Error", "Error en la transaccion")
       }
 
     });
@@ -1308,18 +1339,18 @@ console.log( this.tajetaIden)
 
 
 
- async guardaKyana(){
+  async guardaKyana() {
     console.log("guardar")
     const loading = await this.loadingController.create({ message: 'Registrando Informacion ...' })
     await loading.present();
     this.conexionService.validarDatos(this.validar).subscribe(res => {
       console.log(res)
       loading.dismiss();
-      this.estado5=false;
-      this.botones=false;
+      this.estado5 = false;
+      this.botones = false;
       this.estadoPago = true
-      
-    }) 
+
+    })
   }
 
 
@@ -1399,28 +1430,36 @@ console.log( this.tajetaIden)
 
     this.validar = new Validar();
     this.validar.cedula = this.cedulaTitular;
-
+    console.log(this.broker)
     this.validar.frecuencia = this.frecuenciPagos;
     if (this.cuentabroker == "SI") {
-      this.validar.broker = this.broker.parent;
+      if (this.broker) {
+        this.validar.broker = this.broker.parent;
+      } else {
+        this.validar.broker = "";
+      }
+
+
+
     } else if (this.cuentabroker == "NO") {
       this.validar.broker = null;
     }
 
     console.log(this.validar)
 
-    if (this.cuentabroker == undefined || this.cuentabroker == "") {
+
+    if (this.cuentabroker == undefined || this.cuentabroker == "" || this.validar.broker == "") {
       this.alertError("Alerta!", 'Seleccione si cuenta con un Broker');
     } else {
       console.log("Proceder al pago")
       this.realizarPago();
 
-       
+
     }
 
   }
 
-  nuevaCotizacion(){
+  nuevaCotizacion() {
     console.log("termino")
     window.location.reload();
   }
@@ -1441,6 +1480,7 @@ console.log( this.tajetaIden)
   }
 
   seleccionPlan($event, item) {
+
     console.log($event);
     console.log($event.target.checked);
     console.log($event.target.id);
@@ -1461,12 +1501,20 @@ console.log( this.tajetaIden)
       if ($event.target.id == element.plan) {
         /* var cambio = document.getElementById($event.target.id)
         cambio["checked"]=false; */
+
         this.plan = item;
         estado = false;
+
+        if ($event.target.checked == true) {
+          estado = true;
+          this.plan = "";
+        }
+        console.log($event.target.checked);
 
       } else {
         var cambio = document.getElementById(element.plan)
         cambio["checked"] = false;
+        console.log($event.target.checked);
       }
 
 
