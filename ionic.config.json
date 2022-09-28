@@ -1,7 +1,7 @@
 {
   "name": "cotizador_asimed",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   },
   "type": "angular"
 }

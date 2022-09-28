@@ -190,11 +190,23 @@ export class HomePage {
   public orderStatus = "Datos"
 
   sig = document.getElementById("siguiente");
+
+  priMensual:any;
+  impMensual:any;
+  totMensual:any;
+  
+  priSemest:any;
+  impSemest:any;
+  totSemest:any;
+
+  priAnual:any;
+  impAnual:any;
+  totAnual:any;
   constructor(private conexionService: ConexionService, private loadingController: LoadingController,
     private alertController: AlertController, private modalController: ModalController) { }
   ngOnInit() {
 
-
+const pru=50.50
     this.eliminarLocalstorage();
 
 
@@ -205,6 +217,7 @@ export class HomePage {
     this.listaEdades = "";
     this.estado1 = true;
     //this.principal2 = true;
+    this.principal = true;
 
 
 
@@ -741,6 +754,20 @@ export class HomePage {
       this.mens = data.message.datoList[0].prima_mensual;
       this.impu = data.message.datoList[0].impuestos;
       this.tot = data.message.datoList[0].total;
+      
+
+
+      this.priMensual = this.mens.toFixed(2);
+      this.impMensual = this.impu.toFixed(2);
+      this.totMensual = this.tot.toFixed(2);
+
+      this.priSemest = (this.mens * 6).toFixed(2);
+      this.impSemest = (this.impu * 6).toFixed(2);
+      this.totSemest = (this.tot * 6).toFixed(2);
+
+      this.priAnual = (this.mens * 12).toFixed(2);
+      this.impAnual = (this.impu * 12).toFixed(2);
+      this.totAnual = (this.tot * 12).toFixed(2);
 
       this.identificacion = this.cedulaTitular;
       this.asismed = data.message.identificador;
