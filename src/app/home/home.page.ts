@@ -204,6 +204,7 @@ export class HomePage {
     this.color = "asdfasdfaa"
     this.listaEdades = "";
     this.estado1 = true;
+    //this.principal2 = true;
 
 
 
