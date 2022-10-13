@@ -56,6 +56,26 @@ export class ConexionService {
     return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'blob' });
   }
 
+  getTmpEntidad_pdf(name) {
+    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getTmpEntidad_pdf';
+    let datos = {
+      datos:{ identificador: name}
+     
+    };
+    console.log(datos)
+    return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'blob' });
+  }
+
+  sendmail_Cotizacion(name) {
+    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.sendmail_Cotizacion';
+    let datos = {
+      datos:{ identificador: name}
+     
+    };
+    console.log(datos)
+    return this.httpClient.post(url, datos, { headers:  { 'Content-Type': 'application/json'} });
+  }
+
 
 
   getCiudades(){

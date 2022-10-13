@@ -124,7 +124,7 @@
 
                 <ion-label class="label" position="stacked">Cedula</ion-label>
 
-                <ion-input [(ngModel)]="cedulaTitular" class="texto" (ionChange)="consultarCedula($event)">
+                <ion-input [(ngModel)]="cedulaTitular" maxlength="10" class="texto" (ionChange)="consultarCedula($event)">
                 </ion-input>
 
               </ion-col>
@@ -134,7 +134,7 @@
 
 
 
-                <ion-input [(ngModel)]="nombre1" class="texto" id="nombre1">
+                <ion-input [(ngModel)]="nombre1" class="texto" id="nombre1" [disabled]="estadoConsulta">
                 </ion-input>
 
               </ion-col>
@@ -144,7 +144,7 @@
 
 
 
-                <ion-input [(ngModel)]="apellido1" class="texto" id="apellido1">
+                <ion-input [(ngModel)]="apellido1" class="texto" id="apellido1" [disabled]="estadoConsulta">
                 </ion-input>
 
               </ion-col>
@@ -155,7 +155,7 @@
 
 
                 <ion-input (ionChange)="calculoEdad($event)" class="texto" id="fechaconsulta" type="date"
-                  value="fechaconsulta" id="fechanacTitular" [(ngModel)]="fechanacTitular"></ion-input>
+                  value="fechaconsulta" id="fechanacTitular" [(ngModel)]="fechanacTitular" [disabled]="estadoConsulta"></ion-input>
 
                 <!-- <ion-select [interfaceOptions]="customAlertOptions"  cancelText="Cancelar" [interfaceOptions]="customAlertOptions"  cancelText="Cancelar"  style="border: 0.5px solid  #001b83 !important; background: #e7e7e78c;border-radius: 8px; " [(ngModel)]="edad1">
         <ion-select-option *ngFor="let item of listaEdades" value="{{item}}">{{item}}</ion-select-option>
@@ -180,7 +180,7 @@
         color: #17202A;
         font-size: 15px;
         font-weight: bold;
-        border-radius: 8px;" id="correo1">
+        border-radius: 8px;" id="correo1" [disabled]="estadoConsulta">
                 </ion-input>
 
               </ion-col>
@@ -191,7 +191,7 @@
                 <ion-label class="label">Domicilio</ion-label>
 
 
-                <ion-input [(ngModel)]="telefono1" id="telefono1" class="texto" type="number">
+                <ion-input [(ngModel)]="telefono1" id="telefono1" class="texto" type="number" [disabled]="estadoConsulta">
                 </ion-input>
 
 
@@ -205,7 +205,7 @@
                 <ion-label class="label">Celular</ion-label>
 
 
-                <ion-input [(ngModel)]="celular1" class="texto" type="number" id="celular1">
+                <ion-input [(ngModel)]="celular1" class="texto" type="number" id="celular1" [disabled]="estadoConsulta">
                 </ion-input>
 
               </ion-col>
@@ -214,7 +214,7 @@
 
                 <ion-label style=" color: #001b83;font-weight: bold;">Genero</ion-label>
                 <ion-select id="genero1" [interfaceOptions]="customAlertOptions" cancelText="Cancelar" class="texto"
-                  [(ngModel)]="genero1">
+                  [(ngModel)]="genero1" [disabled]="estadoConsulta">
                   <ion-select-option value="Masculino">Masculino</ion-select-option>
                   <ion-select-option value="Femenino">Femenino</ion-select-option>
                 </ion-select>
@@ -445,7 +445,7 @@
   <div class="container" *ngIf="estado3">
     <ion-grid>
       <ion-row style="padding-top: 20px;">
-        <ion-col size-xs="12" size-md="8" size-xl="7" offset-xl="2.5" offset-md="2">
+        <ion-col size-xs="12" size-md="10" size-xl="10" offset-xl="1" offset-md="1">
 
 
 
@@ -530,7 +530,8 @@
             </div>
 
 
-            <ion-row style=" display: flex; justify-content: center;" *ngIf="tresDatos">
+            <ion-row style=" display: flex; justify-content: center;">
+              <!-- <ion-row style=" display: flex; justify-content: center;" *ngIf="tresDatos"> -->
               <!--    <ion-col *ngFor="let item of listaPlanes" size-xs="12" size-md="4" size-xl="4">
 
 
@@ -548,9 +549,10 @@
 
 
         </ion-button> -->
-              <ion-col size-xs="12" size-md="12" size-xl="12">
+
+              <ion-col size-xs="12" size-md="12" size-xl="12" *ngIf="listaPlanes" >
                 <ion-row style=" display: flex; justify-content: center;">
-                  <ion-col *ngFor="let item of listaPlanes; let in=index" size-xs="10" size-md="4" size-xl="4">
+                  <ion-col *ngFor="let item of listaPlanes; let in=index" size-xs="10" size-md="4" size-xl="3">
 
                     <ion-card class="cardBajo md hydrated">
                       <ion-card-header class="cardBajoCabecera ion-inherit-color md hydrated">
@@ -1192,20 +1194,37 @@
 
   <ion-grid class="container" *ngIf="estadoPago">
 
-    <ion-row style="text-align: center; display: flex;justify-content: center;">
-      <ion-col size-xs="12" size-md="8" size-xl="8" class="secondary-background md hydrated">
+    <ion-row style="text-align: center; display: flex;justify-content: center;padding-top: 20px;">
+      <ion-col size-xs="12" size-md="7" size-xl="7" class="secondary-background md hydrated">
         <ion-row>
           <ion-col size="12">
             <img src="assets/images/cot_robot.png" class="img_robot">
           </ion-col>
-        </ion-row> &nbsp;&nbsp;<label class="titulo">
-          <strong>Pago Generado &nbsp;</strong>
+        </ion-row> &nbsp;&nbsp;
+        <div style="text-align: left;"> 
+        <label class="titulo">
+          
+          <strong>Cotización Generada &nbsp;</strong>
           <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img" aria-label="checkmark circle">
           </ion-icon>
-        </label><br> &nbsp;&nbsp;<label class="subtitulo">
+        </label><br> &nbsp;&nbsp;
+        
+        <label class="subtitulo">
           <ion-icon name="mail-outline" style="color: #001b83;" role="img" aria-label="mail outline">
-          </ion-icon>&nbsp;Revise su correo para acceder a la informacion.
+          </ion-icon>&nbsp;Se envio un correo con la informacion.
         </label><br><br>
+      </div>
+        <ion-row>
+
+          <ion-col size="12">
+            <button (click)="descargarPDF()" class="btn btn--primary">Descargar en PDF
+
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+
         <ion-row>
 
           <ion-col size="12">
@@ -1215,7 +1234,11 @@
           </ion-col>
 
         </ion-row>
+
       </ion-col>
+
+
+      
     </ion-row>
 
   </ion-grid>

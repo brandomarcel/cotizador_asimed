@@ -8,6 +8,7 @@ import { Validar } from '../entidades/validar';
 import { ProseSubsc, Respuesta, Status } from '../entidades/prose-subsc';
 import { formatDate } from "@angular/common";
 import { RegisSubs, Subscription } from '../entidades/regis-subs';
+import Swal from 'sweetalert2';
 
 
 declare var externo;
@@ -69,7 +70,7 @@ export class HomePage {
       }
     }, error => {
       console.error(error)
-      this.alertError("Error", "Error de conexion vuelva a intentarlo...")
+      this.sweetMensaje("Error de conexion vuelva a intentarlo...","Error")
       loading.dismiss();
 
     });
@@ -172,7 +173,7 @@ export class HomePage {
   tresDatos: boolean;
   statusRegSus: any;
   tajetaIden: any;
-
+  estadoConsulta:boolean;
   buttonIcon: string = "md-add";
   color1: string = "black";
   format2 = 'yyyy-MM-ddTHH:mm:ss-05:00';
@@ -206,7 +207,7 @@ export class HomePage {
     private alertController: AlertController, private modalController: ModalController) { }
   ngOnInit() {
 
-const pru=50.50
+this.estadoConsulta=true;
     this.eliminarLocalstorage();
 
 
@@ -218,6 +219,9 @@ const pru=50.50
     this.estado1 = true;
     //this.principal2 = true;
     this.principal = true;
+
+    //this.botones=false;
+    //this.estadoPago=true;
 
 
 
@@ -267,6 +271,7 @@ const pru=50.50
   }
 
   continuarPrincipal() {
+   
   this.principal2 = true;
   this.principal = false;
   }
@@ -315,6 +320,7 @@ const pru=50.50
       console.log(data);
     }, error => {
       loading.dismiss();
+      this.sweetMensaje('Error al descarga!','error')
       console.log(error);
     });
   }
@@ -331,7 +337,8 @@ const pru=50.50
       this.ciudades = temp
       console.log(this.ciudades)
     }, error => {
-      this.alertError("Error", "Error de conexion..");
+      this.sweetMensaje('Error de conexion...','error')
+      
       console.log(error);
     });
 
@@ -378,7 +385,8 @@ const pru=50.50
         || this.fechanacTitular == undefined || this.genero1 == undefined
       ) {
         console.log(" no entro");
-        this.alertError("Alerta!", 'Llene todos los campos');
+        
+        this.sweetMensaje('Llene todos los campos','warning')
         this.currentactive--;
         (<HTMLSelectElement>document.getElementById("atras")).disabled = true;
       }
@@ -386,8 +394,10 @@ const pru=50.50
         var ced = this.validadorDeCedula(String(this.cedulaTitular));
 
         var email = this.validarEmail(String(this.correo1))
+        console.log(email)
+        console.log(this.fechanacTitular)
         var edad = this.calculoEdad(this.fechanacTitular)
-
+console.log(edad)
         var fecha = this.validarFecha(this.fechanacTitular);
       
 
@@ -443,15 +453,16 @@ const pru=50.50
 
         } else if (ced == false) {
           this.currentactive--;
-          this.alertError("Alerta!", 'Ingrese una cedula valida');
+          this.sweetMensaje('Ingrese una cedula valida','warning');
+          
         }
         else if (email == false) {
           this.currentactive--;
-          this.alertError("Alerta!", 'Ingrese un correo valido');
+          this.sweetMensaje('Ingrese un correo valido','warning');
+         
         }else if(fecha == false){
           this.currentactive--;
-          this.alertError("Alerta!", 'Ingrese una fecha valida');
-        
+          this.sweetMensaje('Ingrese una fecha valida','warning');
         }
 
       }
@@ -485,7 +496,8 @@ const pru=50.50
         this.update();
 
       } else if (lleno == "no") {
-        this.alertError("Alerta!", 'Llene todos los campos');
+        this.sweetMensaje('Llene todos los campos','error');
+        
       }
 
 
@@ -495,7 +507,8 @@ const pru=50.50
       console.log(this.plan);
 
       if (this.plan == "" || this.plan == undefined) {
-        this.alertError("Alerta!", 'Elija un plan');
+        this.sweetMensaje('Elija un plan','warning');
+       
         this.currentactive--;
       } else {
 
@@ -513,7 +526,8 @@ const pru=50.50
         || this.fechanacTitular == "" || this.fechanacTitular == undefined) {
         this.currentactive--;
         console.log("ERROR NO LLENO 5")
-        this.alertError("Alerta!", 'Llene todos los campos');
+       
+        this.sweetMensaje('Llene todos los campos','error');
 
       } else {
 
@@ -792,14 +806,16 @@ const pru=50.50
     }
   }
 
-  calculoEdad(fecha) {
-    /* console.log($event.target.value);
-    var fecha=$event.target.value */
+  calculoEdad(fecNac) {
+    //var fecha=fecNac.detail.value;
     var hoy = new Date();
-    var cumpleanos = new Date(fecha);
+    var cumpleanos = new Date(fecNac);
     var edad = hoy.getFullYear() - cumpleanos.getFullYear();
     var m = hoy.getMonth() - cumpleanos.getMonth();
 
+    console.log('cumplea;os',cumpleanos)
+    console.log('edad',edad)
+console.log(m)
     if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
       edad--;
     }
@@ -814,7 +830,8 @@ const pru=50.50
     var cedula = $event.target.value;
     console.log(cedula.length)
 
-    if (cedula.length == 0) {
+    if (cedula.length <10) {
+      this.estadoConsulta=true;
       this.nombre1 = "";
       this.apellido1 = "";
       this.fechanacTitular = "";
@@ -832,7 +849,7 @@ const pru=50.50
       console.log(cedvalida)
       const variableOne = "";
       if (cedvalida == true) {
-
+        this.estadoConsulta=false;
         this.nombre1 = "";
         this.apellido1 = "";
         this.fechanacTitular = "";
@@ -850,6 +867,7 @@ const pru=50.50
           var persona = res.message
 
           if (persona == false) {
+            this.estadoConsulta=false;
             this.estcivi = false;
             this.nombre1 = "";
             this.apellido1 = "";
@@ -929,7 +947,8 @@ const pru=50.50
             console.log(email)
             if (email == false) {
               console.log(true)
-              this.alertError("Alerta!", "El correo electronico no es valido contactarse con soporte");
+              this.sweetMensaje('El correo electronico no es valido contactarse con soporte','error');
+              
               (<HTMLSelectElement>document.getElementById("siguiente")).disabled = true;
 
             } else {
@@ -942,17 +961,26 @@ const pru=50.50
         }, error => {
           console.log(error)
           loading.dismiss();
-          this.alertError("Alerta!", "Error de conexión");
+          this.sweetMensaje('Error de conexión','error');
+          
         })
 
       } else if (cedvalida == false) {
+        this.nombre1 = "";
+            this.apellido1 = "";
+            this.fechanacTitular = "";
+            this.genero1 = "";
+            this.celular1 = "";
+            this.correo1 = "";
+            this.telefono1 = "";
+            this.ciudad = "";
+            this.provinciaTitular = "";
+            this.direccionTitular = "";
+            this.estadoTitular = "";
         this.currentactive--;
-        this.alertError("Alerta!", 'Ingrese una cedula valida');
+        this.sweetMensaje('Ingrese una cedula valida','warning');
+        
       }
-
-
-
-
 
     }
 
@@ -1004,26 +1032,7 @@ const pru=50.50
 
   }
 
-  async alertError(titulo, mensaje) {
-    const alert = await this.alertController.create({
-      cssClass: 'dlgconfirmar',
-      mode: 'ios',
-      header: titulo,
-      message: mensaje,
-      buttons: [{
-        text: 'OK',
-        role: 'cancel',
-        cssClass: 'secondary',
-
-        handler: (blah) => {
-
-
-        }
-      }]
-    });
-
-    await alert.present();
-  }
+  
 
   async alertPagoTarjeta() {
 
@@ -1062,7 +1071,8 @@ const pru=50.50
             }
 
           } else {
-            this.alertError("Error", "Intente Nuevamente...");
+            this.sweetMensaje('Intente Nuevamente...','error');
+            
 
           }
 
@@ -1143,13 +1153,6 @@ const pru=50.50
 
     });
 
-
-
-
-
-
-
-
   }
 
 
@@ -1202,8 +1205,8 @@ const pru=50.50
       } else if (res == 'RECHAZADO') {
         loading.dismiss();
 
-        this.alertError("Error!", "Alguno de los parámetros de la tarjeta estuvo mal ingresado o hay algún problema en la tarjeta")
-
+        
+        this.sweetMensaje('Alguno de los parámetros de la tarjeta estuvo mal ingresado o hay algún problema en la tarjeta','error');
       }
 
     });
@@ -1358,7 +1361,8 @@ const pru=50.50
       } else {
         loading.dismiss();
         console.error(res[0].payment[0].status.status)
-        this.alertError("Error", "Error en la transaccion")
+        
+        this.sweetMensaje('Error en la transaccion','error');
       }
 
     });
@@ -1454,7 +1458,7 @@ const pru=50.50
 
   }
 
-  async guardar() {
+/*   async guardar() {
 
     this.validar = new Validar();
     this.validar.cedula = this.cedulaTitular;
@@ -1485,6 +1489,76 @@ const pru=50.50
 
     }
 
+  } */
+
+  async guardar() {
+
+    this.validar = new Validar();
+    this.validar.cedula = this.cedulaTitular;
+    console.log(this.broker)
+    this.validar.frecuencia = this.frecuenciPagos;
+    if (this.cuentabroker == "SI") {
+      if (this.broker) {
+        this.validar.broker = this.broker.parent;
+      } else {
+        this.validar.broker = "";
+      }
+
+
+
+    } else if (this.cuentabroker == "NO") {
+      this.validar.broker = null;
+    }
+
+    console.log(this.validar)
+
+
+    if (this.cuentabroker == undefined || this.cuentabroker == "" || this.validar.broker == "") {
+      
+      this.sweetMensaje('Seleccione si cuenta con un Broker','warning');
+    } else {
+      console.log("finalCotizacion")
+      this.finalCotizacion();
+
+
+    }
+
+  }
+
+  async finalCotizacion(){
+    console.log(this.asismed);
+    const loading = await this.loadingController.create({ message: 'Generando Cotización ...' })
+    await loading.present();
+    this.conexionService.sendmail_Cotizacion(this.asismed).subscribe(data => {
+console.log(data)
+      loading.dismiss();
+
+      if (data['message'].estado == true) {
+        console.log("guardar")
+
+        this.sweetMensaje(data['message'].dato,'success');
+       
+
+            this.estado5 = false;
+            this.botones = false;
+            this.estadoPago = true;
+     
+      }else{
+        this.sweetMensaje(data['message'].mensajeError,'error');
+        
+
+      }
+     
+     
+    }, error => {
+      loading.dismiss();
+      this.sweetMensaje('Error al generar la cotización','error');
+      console.log(error);
+    });
+
+  
+
+    
   }
 
   nuevaCotizacion() {
@@ -1552,4 +1626,46 @@ const pru=50.50
 
     console.log(this.plan)
   }
+
+  async descargarPDF(){
+    console.log(this.asismed);
+
+    const loading = await this.loadingController.create({ message: 'Descargando ...' })
+    await loading.present();
+    this.conexionService.getTmpEntidad_pdf(this.asismed).subscribe(data => {
+
+      var url = window.URL.createObjectURL(data);
+      window.open(url);
+      loading.dismiss();
+      console.log(data);
+    }, error => {
+      loading.dismiss();
+      this.sweetMensaje('Error al descargar el PDF','error');
+      
+      console.log(error);
+    });
+  }
+
+  async sweetMensaje(titulo,icono): Promise<any>{
+    return new Promise(async (resolve) =>{
+      Swal.fire({
+        title: titulo,
+        heightAuto: false,
+        icon: icono,
+        confirmButtonText: 'Ok',
+        //showDenyButton: true,
+        //denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          resolve('ok')
+          
+        } /* else if (result.isDenied) {
+          resolve('cancelar')
+        } */
+      })
+    })
+    
+  }
+  
 }
