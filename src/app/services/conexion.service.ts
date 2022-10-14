@@ -42,7 +42,6 @@ export class ConexionService {
       datos:{ beneficiarios: beneficiarios}
      
     };
-    console.log(datos)
     return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
 
@@ -81,6 +80,13 @@ export class ConexionService {
   getCiudades(){
     let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.localidades'
     return this.httpClient.post( url , {}, { headers:  { 'Content-Type': 'application/json'} });
+  }
+
+  getDetallePlanHTML(plan) {
+    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getDetallePlanHTML';
+    let datos ={ plan: plan}
+     
+    return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
 
   insertDatos(registro:Registro): Observable<any>{

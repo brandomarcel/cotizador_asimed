@@ -552,7 +552,7 @@
 
               <ion-col size-xs="12" size-md="12" size-xl="12" *ngIf="listaPlanes" >
                 <ion-row style=" display: flex; justify-content: center;">
-                  <ion-col *ngFor="let item of listaPlanes; let in=index" size-xs="10" size-md="4" size-xl="3">
+                  <ion-col *ngFor="let item of listaPlanes ; let in=index" size-xs="10" size-md="6" size-xl="4">
 
                     <ion-card class="cardBajo md hydrated">
                       <ion-card-header class="cardBajoCabecera ion-inherit-color md hydrated">
@@ -571,7 +571,133 @@
                         <h3 style="text-align: center; color: darkblue;">
                           Prima Anual
                         </h3>
-                        <div class="centrardivs" *ngIf="mostrar1'{{in}}'">
+
+                        <div *ngIf="item.descripcion[0]">
+                          <table>
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[0].detalle}} :</b> {{item.descripcion[0].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[1].detalle}}:</b> {{item.descripcion[1].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[2].detalle}}:</b> {{item.descripcion[2].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[3].detalle}}:</b> {{item.descripcion[3].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[4].detalle}}:</b> {{item.descripcion[4].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon><b> {{item.descripcion[5].detalle}}:</b> {{item.descripcion[5].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+                            
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon><b> {{item.descripcion[6].detalle}}:</b> {{item.descripcion[6].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[7].detalle}}:</b> {{item.descripcion[7].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[8].detalle}}:</b> {{item.descripcion[8].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5>
+                                  <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                    aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[9].detalle}}:</b> {{item.descripcion[9].valor}}
+
+                                </h5>
+                              </td>
+                            </tr>
+                           
+                       
+
+                            <!---->
+                          </table>
+                          <div class="centrardivs" (click)="detallePlan(item.plan)">
+                            <hr color="#F9B727">
+
+                            <ion-button mode="ios" size="small"> <ion-icon slot="start" name="eye"></ion-icon>
+                              Detalle</ion-button>
+                          </div>
+
+
+                        <!--   <div class="centrardivs" (click)="activar2($event,in)">
+                            <hr color="#F9B727">
+
+                            <ion-button mode="ios" size="small"> <ion-icon slot="start" name="eye"></ion-icon>
+                              Detalle</ion-button>
+                            
+                             <ion-icon name="chevron-up" size="small" style="color: #F9B727;" role="img"
+                              class="md icon-small hydrated" aria-label="chevron up"></ion-icon> 
+                          </div> -->
+                        </div>
+                        
+                 <!--        <div class="centrardivs" *ngIf="mostrar1'{{in}}'">
                           <hr color="#F9B727">
                           <label class="subtitulo-small">
                             Mostrar Detalles
@@ -580,18 +706,17 @@
                           <ion-icon name="chevron-down" size="small" style="color: #F9B727;" role="img"
                             (click)="activar($event,in)" class="md icon-small hydrated" aria-label="chevron down">
                           </ion-icon>
-                        </div>
+                        </div> -->
                         <!---->
                         <!---->
 
-                        <div *ngIf="mostrar2">
+                        <!-- <div *ngIf="mostrar2">
                           <table>
                             <tr>
                               <td>
                                 <h5>
                                   <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
-                                    aria-label="checkmark circle"></ion-icon> &nbsp; Amparo
-                                  Patrimonial
+                                    aria-label="checkmark circle"></ion-icon> &nbsp; {{item.descripcion[0].detalle}}
 
                                 </h5>
                               </td>
@@ -624,14 +749,14 @@
                               </td>
                             </tr>
 
-                            <!---->
+                         
                           </table>
                           <div class="centrardivs" (click)="activar2($event,in)">
                             <hr color="#F9B727">
                             <ion-icon name="chevron-up" size="small" style="color: #F9B727;" role="img"
                               class="md icon-small hydrated" aria-label="chevron up"></ion-icon>
                           </div>
-                        </div>
+                        </div> -->
                       </ion-card-content>
                       <div style="text-align: center; display: flex;justify-content: center; background: #fffefefd;">
 

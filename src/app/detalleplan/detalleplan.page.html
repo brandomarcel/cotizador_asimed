@@ -1,0 +1,20 @@
+<ion-header >
+  
+  <ion-toolbar  lines="none" style="--background: #edac39;">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/" name="close-outline" text="Atras"></ion-back-button> -->
+      <ion-button (click)="atras()">
+        <ion-icon name="close" color="dark" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="color: black;">Detalle {{nuevo}}</ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <td [innerHTML]="html"> </td>
+
+</ion-content>

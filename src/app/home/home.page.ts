@@ -9,6 +9,7 @@ import { ProseSubsc, Respuesta, Status } from '../entidades/prose-subsc';
 import { formatDate } from "@angular/common";
 import { RegisSubs, Subscription } from '../entidades/regis-subs';
 import Swal from 'sweetalert2';
+import { DetalleplanPage } from '../detalleplan/detalleplan.page';
 
 
 declare var externo;
@@ -598,12 +599,12 @@ console.log(edad)
         console.log(this.words2.length);
         this.conteoBeneficiarios = this.words2.length;
         if (this.conteoBeneficiarios === 0) {
-
+          console.log('conteoBeneficiarios= 0');
           var soloTitular = [{ rango_edad: this.edad1, genero: this.genero1 }];
           console.log(soloTitular);
           this.getPlanes(soloTitular);
         } else {
-
+          console.log('else');
           var soloTitular = [{ rango_edad: this.edad1, genero: this.genero1 }];
           var todos = this.words2.concat(soloTitular);
           console.log(this.words2);
@@ -1580,7 +1581,20 @@ console.log(data)
     this.mostrar1 = true;
     this.mostrar2 = false;
   }
+  async detallePlan(plan){
+    console.log(plan);
 
+    const modal = await this.modalController.create({
+      component: DetalleplanPage,
+      cssClass: 'custom_modal',
+      mode:'ios',
+      componentProps: {
+        nuevo: plan,
+      }
+    });
+     return await modal.present();
+
+  }
   seleccionPlan($event, item) {
 
     console.log($event);
