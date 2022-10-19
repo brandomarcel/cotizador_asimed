@@ -185,6 +185,8 @@ export class HomePage {
   listaEdades: any = [];
   listaEstados: any = ["CASADO(A)", "DIVORCIADO(A)", "SOLTERO(A)", "UNIÓN LIBRE", "UNIÓN DE HECHO", "VIUDO(A)"];
 
+
+  listaPlanselec: any = [];
   //Demo purpose only, Data might come from Api calls/service
   public counts = [{ name: "Datos", icono: "person" }, { name: "Beneficiarios", icono: "people" }, { name: "Plan", icono: "reader" },
   { name: "Información", icono: "newspaper" }, { name: "Finalizar", icono: "checkmark-circle-sharp" }];
@@ -401,10 +403,11 @@ this.estadoConsulta=true;
 console.log(edad)
         var fecha = this.validarFecha(this.fechanacTitular);
       
+        if (edad === 0 ) {
+          this.edad1 = "0-11 meses";
 
-
-        if (edad >= 0 && edad <= 17) {
-          this.edad1 = "0-17";
+        } else if (edad >= 1 && edad <= 17) {
+          this.edad1 = "1-17";
 
         } else if (edad >= 18 && edad <= 24) {
           this.edad1 = "18-24";
@@ -1596,8 +1599,11 @@ console.log(data)
 
   }
   seleccionPlan($event, item) {
+this.listaPlanselec.push( item)
 
-    console.log($event);
+
+
+    console.log(this.listaPlanselec);
     console.log($event.target.checked);
     console.log($event.target.id);
     console.log(item);
