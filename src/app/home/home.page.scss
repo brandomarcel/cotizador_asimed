@@ -26,6 +26,23 @@
 
 }
 
+
+.beneficiarios{
+  ion-row{
+    ion-col{
+      border: 1px solid  #001b83 !important;
+     
+      font-size: 2.5vh;
+      label{
+      
+        font-size: calc(0.7rem + 0.5vw);
+        text-align: end;
+      }
+    }
+  }
+
+}
+
 #container strong {
   font-size: 20px;
   line-height: 26px;
@@ -254,6 +271,7 @@ text-transform: uppercase;
   font-family: Montserrat,sans-serif;
   text-align: left;
   color: #001b83;
+  font-size: 20px;
 }
 
 .titulo {
@@ -298,4 +316,8 @@ b, strong {
 
 .planes{
   font-size: 11px;
+}
+
+.scaled {
+  transform: scale(0.8); /* Igual que: scaleX(0.7) scaleY(0.7) */
 }

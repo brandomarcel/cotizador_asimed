@@ -1,6 +1,4 @@
 <ion-header [translucent]="true" lines="none">
-
-
 </ion-header>
 
 <ion-content *ngIf="principal">
@@ -33,7 +31,6 @@
           </ion-row>
 
 
-
           <ion-row style="display: flex;justify-content: center; align-content: center;">
 
             <ion-col size="6">
@@ -43,7 +40,6 @@
             </ion-col>
 
           </ion-row>
-
 
         </div>
       </ion-col>
@@ -258,29 +254,6 @@
                 <ion-row>
                   <ion-col size-xs="12" size-md="12" size-xl="12">
 
-                    <!--               <ion-row>
-
-
-
-                <ion-col size-xs="12" size-md="3.5" size-xl="3.5" style="border: 1px solid  #001b83 !important;">
-
-                  
-                  <ion-label class="label">Edad</ion-label>
-
-                </ion-col>
-                <ion-col size-xs="12" size-md="3.5" size-xl="3.5" style="border: 1px solid  #001b83 !important;">
-                  <ion-label class="label">Genero</ion-label>
-
-                </ion-col>
-                <ion-col size-xs="12" size-md="3.5" size-xl="3.5" style="border: 1px solid  #001b83 !important;">
-                  <ion-label class="label">Parentesco</ion-label>
-
-                </ion-col>
-                <ion-col size-xs="12" size-md="1.5" size-xl="1.5">
-                </ion-col>
-
-              </ion-row> -->
-
                     <ion-row>
 
 
@@ -291,7 +264,7 @@
                         <ion-select [interfaceOptions]="customAlertOptions" cancelText="Cancelar"
                           style="border: 1px solid  #001b83 !important; background: #e7e7e78c; margin-top: 4px;border-radius: 8px;"
                           [(ngModel)]="edad1" disabled="true">
-                          <ion-select-option *ngFor="let item of listaEdades" value="{{item}}">{{item}}
+                          <ion-select-option *ngFor="let item of listaEdades" [value]="item.etiqueta">{{item.detalle}}
                           </ion-select-option>
                         </ion-select>
                       </ion-col>
@@ -345,7 +318,7 @@
                                 style=" background: #e7e7e78c; margin-top: 4px;border-radius: 8px;"
                                 [(ngModel)]="words2[in].rango_edad" name="name{{in}}.rango_edad" #name="ngModel"
                                 required>
-                                <ion-select-option *ngFor="let item of listaEdades" value="{{item}}">{{item}}
+                                <ion-select-option *ngFor="let item of listaEdades" value="{{item.etiqueta}}">{{item.detalle}}
                                 </ion-select-option>
                               </ion-select>
 
@@ -460,8 +433,8 @@
                 <ion-col size="12">
 
                   <label class="titulo">Encontramos los mejores <strong>Planes</strong></label>
-                  <br>
-                  <label class="subtitulo">Seleccione un plan</label>
+                 <!--  <br>
+                  <label class="subtitulo">Seleccione un plan</label> -->
                 </ion-col>
               </ion-row>
 
@@ -502,61 +475,83 @@
 
 
 
-                        <ion-col size-xs="12" size-md="2.7" size-xl="2.5">
+                        <ion-col size-xs="6" size-md="3" size-xl="3">
                           <ion-label class="label">Beneficiarios:</ion-label>
 
                         </ion-col>
-                        <ion-col size-xs="12" size-md="3" size-xl="3">
+                        <ion-col size-xs="6" size-md="9" size-xl="9">
                           <ion-label class="datosPlan">{{conteoBeneficiarios}}</ion-label>
+                        </ion-col>
+                      </ion-row>
+                     
 
+                      <div *ngIf="(conteoBeneficiarios>0)">
+                          <div style="text-align: center; font-weight: bold;"  >
+                            <ion-row  >
+                         
+                              <ion-col  >
+                                Genero
+                              </ion-col>
+                              <ion-col>
+                                Parentezco
+                              </ion-col>
+                              <ion-col>
+                                Edad
+                              </ion-col>
+                            </ion-row>
+                          </div>
+                            <div class="beneficiarios">
+                            <ion-row *ngFor="let item of words2">
+                           
+                              <ion-col>
+                                <label > {{item.genero}}</label>
+                                
+                              </ion-col>
+                              <ion-col>
+                                <label >  {{item.parentesco}}</label>
+                                
+                              </ion-col>
+                              <ion-col>
+                                <label >   {{item.rango_edad}}</label>
+                               
+                              </ion-col>
+                            </ion-row>
+                          </div>
+
+                          </div>
                         </ion-col>
 
                       </ion-row>
 
+                 
 
-                    </ion-col>
-
-
-
-
-
-
-                  </ion-row>
+                
 
 
 
                 </ion-col>
               </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+
+                  <label class="titulo">Seleccione hasta 3 planes para la cotización</label>
+                </ion-col>
+              </ion-row>
+
             </div>
 
-
-            <ion-row style=" display: flex; justify-content: center;">
-              <!-- <ion-row style=" display: flex; justify-content: center;" *ngIf="tresDatos"> -->
-              <!--    <ion-col *ngFor="let item of listaPlanes" size-xs="12" size-md="4" size-xl="4">
+            <div >
+            <ion-row >
 
 
-      <ion-button [color]="color" [style]="colorButon" (click)="open($event, item.plan)">
-
-          <li>
-            <b style="color: #001b83;">{{ item.plan }} </b>
-            <p> Prima Mensual: {{item.prima_mensual}}</p>
-
-            <p> Prima Anual: {{item.prima_anual}}</p>
-
-          </li>
-
-
-
-
-        </ion-button> -->
-
-              <ion-col size-xs="12" size-md="12" size-xl="12" *ngIf="listaPlanes" >
+              <ion-col  size-xs="12" size-md="12" size-xl="12" *ngIf="listaPlanes" >
                 <ion-row style=" display: flex; justify-content: center;">
                   <ion-col *ngFor="let item of listaPlanes ; let in=index" size-xs="11" size-md="6" size-xl="4">
 
-                    <ion-card class="cardBajo md hydrated">
-                      <ion-card-header class="cardBajoCabecera ion-inherit-color md hydrated">
-                        <ion-card-subtitle class="cardBajoTitulo ion-inherit-color md hydrated" role="heading"
+                    <ion-card class="cardBajo">
+                      <ion-card-header class="cardBajoCabecera ">
+                        <ion-card-subtitle class="cardBajoTitulo" role="heading"
                           aria-level="3">
                           {{ item.plan}}
                         </ion-card-subtitle>
@@ -799,6 +794,8 @@
 
             </ion-row>
 
+            </div>
+
           </div>
         </ion-col>
 
@@ -1019,7 +1016,7 @@
   <div class="container" *ngIf="estado5">
     <ion-grid>
       <ion-row style="padding-top: 20px;">
-        <ion-col size-xs="12" size-md="8" size-xl="7" offset-xl="2.5" offset-md="2">
+        <ion-col size-xs="12" size-md="11" size-xl="11" offset-xl="0.5" offset-md="0.5" >
 
 
 
@@ -1027,8 +1024,8 @@
             <ion-row>
               <ion-col size="12">
 
-                <label class="titulo">A un paso de <strong>Finalizar</strong> la cotización del plan
-                  <strong>"{{plan}}"</strong> </label>
+                <label class="titulo">A un paso de <strong>Finalizar</strong> la cotización.
+                   </label>
                 <br>
                <!--  <label class="subtitulo">Elija un frecuencia de pago</label> -->
               </ion-col>
@@ -1056,7 +1053,7 @@
                   <ion-row>
                     <ion-col size="12"
                       style="text-align: center; display: flex;justify-content: center; font-size: 25px;">
-                      <ion-text class="subtitulo">Resumen de pago</ion-text>
+                      <ion-text class="titulo">Resumen</ion-text>
                     </ion-col>
                   </ion-row>
 
@@ -1064,7 +1061,7 @@
                 </ion-col>
               </ion-row>
 
-<div style="text-align: center; font-weight: bold;">
+<!-- <div style="text-align: center; font-weight: bold;">
               <ion-row>
                 <ion-col size="4.5">
                   
@@ -1132,7 +1129,7 @@
                   
                 </ion-col>
               </ion-row>
-            </div>
+            </div> -->
 
            <!--    <ion-row>
 
@@ -1190,6 +1187,366 @@
 
             </div>
 
+
+
+
+
+            <ion-accordion-group [multiple]="true" >
+              <ion-accordion  value="first">
+                <ion-item slot="header" color="primary">
+                  <ion-label>Comparación de Planes</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  <ion-row style=" display: flex; justify-content: center;">
+                    <ion-col size-xs="12" size-md="12" size-xl="12" *ngIf="listaPlanes" >
+                      <ion-row style=" display: flex; justify-content: center;">
+                        <ion-col *ngFor="let item of comparacion ; let in=index" size-xs="11" size-md="6" size-xl="4">
+      
+                          <ion-card class="cardBajo md hydrated">
+                            <ion-card-header class="cardBajoCabecera ion-inherit-color md hydrated">
+                              <ion-card-subtitle class="cardBajoTitulo ion-inherit-color md hydrated" role="heading"
+                                aria-level="3">
+                                {{ item.plan}}
+                              </ion-card-subtitle>
+                            </ion-card-header>
+                            <ion-card-content class="md card-content-md hydrated">
+                              <h5 style="text-align: center;">
+                                Prima Mensual:$ {{item.prima_mensual | number:'1.2-2' }}
+                              </h5>
+                              <h1 _ngcontent-nwu-c47="" style="text-align: center; color: black;">
+                                ${{item.prima_anual | number:'1.2-2' }}
+                              </h1>
+                              <h3 style="text-align: center; color: darkblue;">
+                                Prima Anual
+                              </h3>
+      
+                              <div *ngIf="item.descripcion[0]">
+                                <table>
+                                  <tr>
+                                    <td>
+                                      <label class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[0].detalle}} :</b> {{item.descripcion[0].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[1].detalle}}:</b> {{item.descripcion[1].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[2].detalle}}:</b> {{item.descripcion[2].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[3].detalle}}:</b> {{item.descripcion[3].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[4].detalle}}:</b> {{item.descripcion[4].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon><b> {{item.descripcion[5].detalle}}:</b> {{item.descripcion[5].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon><b> {{item.descripcion[6].detalle}}:</b> {{item.descripcion[6].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[7].detalle}}:</b> {{item.descripcion[7].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[8].detalle}}:</b> {{item.descripcion[8].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                  <tr>
+                                    <td>
+                                      <label  class="planes">
+                                        <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                                          aria-label="checkmark circle"></ion-icon> <b> {{item.descripcion[9].detalle}}:</b> {{item.descripcion[9].valor}}
+      
+                                      </label>
+                                    </td>
+                                  </tr>
+      
+                                </table>
+                                <div class="centrardivs" (click)="detallePlan(item.plan)">
+                                  <hr color="#F9B727">
+      
+                                  <ion-button mode="ios" size="small"> <ion-icon slot="start" name="eye"></ion-icon>
+                                    Detalle</ion-button>
+                                </div>
+      
+                              </div>
+      
+                            </ion-card-content>
+      
+                          </ion-card>
+      
+      
+                        </ion-col>
+      
+                      </ion-row>
+      
+                    </ion-col>
+      
+                  </ion-row>
+      
+      
+                </div>
+              </ion-accordion>
+              <ion-accordion value="second">
+                <ion-item slot="header" color="primary">
+                  <ion-label>Comparación de Pagos</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  
+            <ion-row style=" display: flex; justify-content: center;">
+
+              <ion-col size-xs="12" size-md="12" size-xl="12" >
+                <ion-row >
+                  <ion-col *ngFor="let item of listapagosDevuelta ; let in=index" size-xs="12" size-md="6" size-xl="4">
+
+                    <ion-card class="cardBajo">
+                      <ion-card-header class="cardBajoCabecera">
+                        <ion-card-subtitle class="cardBajoTitulo" role="heading"
+                          aria-level="3">
+                          {{ item.plan}}
+                        </ion-card-subtitle>
+                      </ion-card-header>
+                      <ion-card-content class="md card-content-md hydrated">
+                        <div><ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                          aria-label="checkmark circle"></ion-icon>
+                          <label style="color: #000000;"><b> Pago Mensual</b></label> 
+                         
+                          <ion-card>
+                            <ion-card-content>
+                      <ion-row>
+                                <ion-col size="7.5">
+                                  Prima Neta:   
+                                </ion-col>
+                              
+                                <ion-col>
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.prima_mensual | currency}}</div>
+                                </ion-col>
+                              </ion-row>
+ 
+                              <ion-row>
+                                <ion-col size="7.5">
+                                  
+                                  Impuestos y Contribuciones:
+                                </ion-col>
+    
+                                <ion-col >
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.impuestos | currency}} </div>
+                                  
+                                </ion-col>
+                              </ion-row>
+    
+                              <ion-row>
+                                <ion-col size="7.5">
+                                  Total:
+                                </ion-col>
+    
+                                <ion-col>
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.total | currency}} </div>
+                                  
+                                </ion-col>
+                              </ion-row>
+                              
+                          
+
+                            </ion-card-content>
+                          </ion-card>
+
+                        </div>
+                        <div><ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                          aria-label="checkmark circle"></ion-icon>
+                          
+                          <label style="color: #000000;"><b> Pago Semestral</b></label> 
+                          <ion-card>
+                            <ion-card-content>
+                          <ion-row>
+                            <ion-col size="7.5">
+                              Prima Neta:   
+                            </ion-col>
+                          
+                            <ion-col>
+                              <div style="font-size: 15px;font-weight: bold;"> {{item.prima_mensual*6 | currency}}</div>
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row>
+                            <ion-col size="7.5">
+                              Impuestos y Contribuciones:
+                            </ion-col>
+
+                            <ion-col >
+                              <div style="font-size: 15px;font-weight: bold;"> {{item.impuestos*6 | currency}}  </div>
+                              
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row>
+                            <ion-col size="7.5">
+                              Total:
+                            </ion-col>
+
+                            <ion-col>
+                              <div style="font-size: 15px;font-weight: bold;">  {{item.total*6 | currency}}   </div>
+                             
+                            </ion-col>
+                          </ion-row>
+                               
+                                 
+                                 
+                               
+
+                             
+                               
+                            
+                            </ion-card-content>
+                          </ion-card>
+
+                        </div>
+
+                        <div>
+                          <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img"
+                          aria-label="checkmark circle"></ion-icon>
+                          <label style="color: #000000;"><b> Pago Anual</b></label> 
+                          
+                          <ion-card>
+                            <ion-card-content>
+
+                              <ion-row>
+                                <ion-col size="7.5">
+                                  Prima Neta:   
+                                </ion-col>
+                              
+                                <ion-col>
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.prima_mensual*12 | currency}}</div>
+                                </ion-col>
+                              </ion-row>
+    
+                              <ion-row>
+                                <ion-col size="7.5">
+                                  Impuestos y Contribuciones:
+                                </ion-col>
+    
+                                <ion-col >
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.impuestos*12 | currency}} </div>
+                                 
+                                </ion-col>
+                              </ion-row>
+    
+                              <ion-row>
+                                <ion-col size="7.5">
+                                  Total:
+                                </ion-col>
+    
+                                <ion-col>
+                                  <div style="font-size: 15px;font-weight: bold;"> {{item.total*12 | currency}}  </div>
+                                  
+                                </ion-col>
+                              </ion-row>
+
+                            </ion-card-content>
+                          </ion-card>
+
+                        </div>
+
+                      </ion-card-content>
+        
+
+                    </ion-card>
+
+                  </ion-col>
+
+
+
+
+                </ion-row>
+
+
+
+
+
+
+
+
+
+
+              </ion-col>
+
+            </ion-row>
+
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+
+
+
+
+
+
+
+
+
+           <!--  ---------------------------------------------------------------
+ -->
             <ion-grid>
               <div style="text-align: center; display: flex;justify-content: center;">
                 <ion-row style="text-align: center;">
@@ -1329,7 +1686,7 @@
         <div style="text-align: left;"> 
         <label class="titulo">
           
-          <strong>Cotización Generada &nbsp;</strong>
+          <strong>Cotización Generada</strong>
           <ion-icon name="checkmark-circle" style="color: #f9b727;" role="img" aria-label="checkmark circle">
           </ion-icon>
         </label><br> &nbsp;&nbsp;

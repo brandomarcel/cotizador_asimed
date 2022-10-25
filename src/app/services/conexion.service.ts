@@ -65,10 +65,10 @@ export class ConexionService {
     return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'blob' });
   }
 
-  sendmail_Cotizacion(name) {
+  sendmail_Cotizacion(name,broker) {
     let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.sendmail_Cotizacion';
     let datos = {
-      datos:{ identificador: name}
+      datos:{ identificador: name,broker:broker}
      
     };
     console.log(datos)

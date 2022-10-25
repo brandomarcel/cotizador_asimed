@@ -187,6 +187,8 @@ export class HomePage {
 
 
   listaPlanselec: any = [];
+
+  listapagosDevuelta:any;
   //Demo purpose only, Data might come from Api calls/service
   public counts = [{ name: "Datos", icono: "person" }, { name: "Beneficiarios", icono: "people" }, { name: "Plan", icono: "reader" },
   { name: "Información", icono: "newspaper" }, { name: "Finalizar", icono: "checkmark-circle-sharp" }];
@@ -281,24 +283,25 @@ this.estadoConsulta=true;
   getEdades() {
     this.listaEdades = "";
     this.conexionService.getEdades().subscribe(data => {
-      console.log(data["message"]);
+      
       this.listaEdades = data["message"].datoList;
+      console.log('this.listaEdades',this.listaEdades);
     }, error => {
       console.log(error);
     });
   }
+
+  planesFinalizar=[];
   getPlanes(datos) {
     this.listaPlanes = "";
     this.conexionService.getPlanes(datos).subscribe(data => {
       console.log(data["message"].datoList);
 
       this.listaPlanes = data["message"].datoList;
-      console.log(this.listaPlanes.length);
-      if (this.listaPlanes.length <= 3) {
-        this.tresDatos = true;
-      } else {
-        this.tresDatos = false;
-      }
+
+this.planesFinalizar= data["message"].datoList;
+      console.log(this.listaPlanes);
+    
 
 
 
@@ -508,10 +511,10 @@ console.log(edad)
     } else if (this.currentactive == 4) {
 
       console.log("entro 4");
-      console.log(this.plan);
+      console.log(this.listaPlanselec);
 
-      if (this.plan == "" || this.plan == undefined) {
-        this.sweetMensaje('Elija un plan','warning');
+      if (!this.listaPlanselec.length) {
+        this.sweetMensaje('Elija al menos un plan','warning');
        
         this.currentactive--;
       } else {
@@ -600,7 +603,10 @@ console.log(edad)
 
       } if (this.orderStatus == "Plan") {
         console.log(this.words2.length);
+        //this.conteoBeneficiarios = this.words2.length;
+//BENEFICIARIOS
         this.conteoBeneficiarios = this.words2.length;
+
         if (this.conteoBeneficiarios === 0) {
           console.log('conteoBeneficiarios= 0');
           var soloTitular = [{ rango_edad: this.edad1, genero: this.genero1 }];
@@ -630,6 +636,31 @@ console.log(edad)
         this.estado5 = false;
 
       } if (this.orderStatus == "Finalizar") {
+        console.log("A un paso de finalizar");
+     
+      
+      console.log('(this.planesFinalizar);',this.planesFinalizar);
+      console.log('(this.listaPlanselec);',this.listaPlanselec);
+      this.planesFinalizar.forEach((element,i) => {
+        this.listaPlanselec.forEach(item => {
+          console.log(element.plan);
+          console.log(item);
+
+          if (element.plan == item) {
+            this.comparacion.push(element)
+
+          }
+        });
+
+        
+       
+
+     
+        
+      });
+
+      console.log(this.comparacion);
+       
         (<HTMLSelectElement>document.getElementById("atras")).disabled = true;
         this.insertDatos();
         this.estado5 = true;
@@ -647,7 +678,7 @@ console.log(edad)
 
 
   }
-
+  comparacion =[];
   before() {
 
 
@@ -735,6 +766,13 @@ console.log(edad)
     console.log(this.plan);
     console.log(this.words2)
 
+    const listaplanesAux=[];
+
+    this.listaPlanselec.forEach(element => {
+      listaplanesAux.push({detalle:element})
+    });
+
+    console.log('listaplanesAux:',listaplanesAux)
 
     this.registro = new Registro();
 
@@ -758,16 +796,20 @@ console.log(edad)
     this.registro.direccion = this.direccionTitular;
     this.registro.telefono = String(this.telefono1);
     this.registro.celular = String(this.celular1);
-    this.registro.plan = this.plan;
+    //this.registro.plan = this.plan;
+    this.registro.planes = listaplanesAux;
     if (this.words2.length == 0) {
       this.registro.beneficiarios = "";
     } else {
       this.registro.beneficiarios = this.words2;
+      
     }
 
     console.log(this.registro);
     this.conexionService.insertDatos(this.registro).subscribe(data => {
       console.log(data.message);
+
+      this.listapagosDevuelta=data.message.datoList
       this.frecuenciPagos = "Mensual"
       this.mens = data.message.datoList[0].prima_mensual;
       this.impu = data.message.datoList[0].impuestos;
@@ -1533,7 +1575,7 @@ console.log(m)
     console.log(this.asismed);
     const loading = await this.loadingController.create({ message: 'Generando Cotización ...' })
     await loading.present();
-    this.conexionService.sendmail_Cotizacion(this.asismed).subscribe(data => {
+    this.conexionService.sendmail_Cotizacion(this.asismed,this.validar.broker).subscribe(data => {
 console.log(data)
       loading.dismiss();
 
@@ -1598,10 +1640,22 @@ console.log(data)
      return await modal.present();
 
   }
+   removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+ 
+    if ( i !== -1 ) {
+        arr.splice( i, 1 );
+    }
+}
   seleccionPlan($event, item) {
-this.listaPlanselec.push( item)
-
-
+    console.log($event.target.id);
+ 
+if ($event.target.checked === false) {
+  this.listaPlanselec.push(item);
+}else{
+  this.removeItemFromArr(this.listaPlanselec,item)
+}
+   
 
     console.log(this.listaPlanselec);
     console.log($event.target.checked);
@@ -1611,18 +1665,30 @@ this.listaPlanselec.push( item)
     var estado: boolean;
 
 
+   
+
+    console.log(this.listaPlanselec);
+
+    if (this.listaPlanselec.length > 3) {
+      this.sweetMensaje("Maximo de planes para cotizar son 3!","warning");
+      this.removeItemFromArr(this.listaPlanselec,item)
+//this.listaPlanselec.splice(3,1);
+console.log(this.listaPlanselec);
+      var cambio = document.getElementById(item)
+
+      console.log(cambio);
+      cambio["checked"] = true;
+    }
 
     /*     var cambio = document.getElementById("LITE 20")
         cambio["checked"]=true;
         this.plan = item; */
 
-    this.listaPlanes.forEach(element => {
+    /* this.listaPlanes.forEach(element => {
       console.log(element.plan)
       console.log(item)
 
       if ($event.target.id == element.plan) {
-        /* var cambio = document.getElementById($event.target.id)
-        cambio["checked"]=false; */
 
         this.plan = item;
         estado = false;
@@ -1644,7 +1710,7 @@ this.listaPlanselec.push( item)
     var cambio = document.getElementById($event.target.id)
     cambio["checked"] = estado;
 
-    console.log(this.plan)
+    console.log(this.plan) */
   }
 
   async descargarPDF(){

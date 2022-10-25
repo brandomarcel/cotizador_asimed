@@ -12,7 +12,8 @@ export class Registro {
     direccion:any;
     telefono:any;
     celular:any;
-    plan:any;
+    //plan:any;
     beneficiarios:any;
+    planes:any;
 
 }
