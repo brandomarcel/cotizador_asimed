@@ -6,7 +6,7 @@ export const environment = {
    //apiUrl: 'http://192.168.100.104:81/api/',
 
   ///////////////////////////////////////
-   apiUrl: 'http://186.5.109.203/api/',
+   apiUrl: 'http://186.5.109.203/',
    autorization:'Basic YXNpc3RtZWQ6QXNpc3RNM2QuMjAyMQ==',
   //////////////////////////////////////////////////
 

@@ -34,7 +34,7 @@
           <ion-row style="display: flex;justify-content: center; align-content: center;">
 
             <ion-col size="6">
-              <ion-button style="height: 50px; width: 100%; color: black; --border-radius: 20px;" color="warning"
+              <ion-button style="height: 50px; width: 100%; color: black; --border-radius: 20px;background: none;" color="warning"
                 class="center" id="siguiente" (click)="continuarPrincipal()"> Continuar
               </ion-button>
             </ion-col>
@@ -231,7 +231,7 @@
   <div class="container" *ngIf="estado2">
     <ion-grid>
       <ion-row style="padding-top: 20px;">
-        <ion-col size-xs="12" size-md="7" size-xl="7" offset-xl="2.5" offset-md="2.5">
+        <ion-col size-xs="12" size-md="9" size-xl="7" offset-xl="2.5" offset-md="1.5">
 
 
 
@@ -550,12 +550,11 @@
                   <ion-col *ngFor="let item of listaPlanes ; let in=index" size-xs="11" size-md="6" size-xl="4">
 
                     <ion-card class="cardBajo">
-                      <ion-card-header class="cardBajoCabecera ">
-                        <ion-card-subtitle class="cardBajoTitulo" role="heading"
-                          aria-level="3">
-                          {{ item.plan}}
-                        </ion-card-subtitle>
-                      </ion-card-header>
+                  
+                      
+                          <!-- <img src="http://186.5.109.203/files/10%20Lite.png" alt=""> -->
+                          <img [src]="apiUrl+item.descripcion[10].valor">
+                
                       <ion-card-content class="md card-content-md hydrated">
                         <h5 style="text-align: center;">
                           Prima Mensual:$ {{item.prima_mensual | number:'1.2-2' }}
@@ -1609,7 +1608,7 @@
   <!-- BOTONES -->
 
   <ion-grid class="container" *ngIf="botones">
-    <div class="container">
+    <div >
       <ion-row style="padding-left: 10px;padding-right: 10px; padding-top: 20px;">
         <ion-col size-xs="12" size-md="8" size-xl="8" offset-xl="2" offset-md="2">
 
@@ -1619,10 +1618,10 @@
             <ion-col size-xs="12" size-md="8" size-xl="8" offset-xl="2" offset-md="2">
 
               <ion-item class="center" lines="none">
-                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;background: none;" color="warning"
                   class="center" id="atras" (click)="clickatras($event)" disabled>Atras
                 </ion-button>
-                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;" color="warning"
+                <ion-button style="height: 100%; width: 100%; color: black; --border-radius: 20px;background: none;" color="warning"
                   class="center" id="siguiente" (click)="clicksiguiente($event)">Siguiente
                 </ion-button>
 
@@ -1657,7 +1656,7 @@
                 </ion-button> -->
 
 
-                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 50%;  --border-radius: 20px;"
+                <ion-button style="height: 100%; width: 100%; color: black; border-radius: 50%;  --border-radius: 20px;background: none;"
                   color="warning" class="center" id="siguiente" (click)="guardar()">Generar Cotización
                 </ion-button>
 

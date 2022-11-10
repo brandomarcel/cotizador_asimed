@@ -17,7 +17,7 @@ export class ConexionService {
   constructor(private httpClient:HttpClient) { }
 
   login(user,pass) {
-    let url = this.apiUrl + 'method/asimed.kentowebws.websw.login';
+    let url = this.apiUrl + 'api/method/asimed.kentowebws.websw.login';
     let datos =  {
       usr:  user,
       pwd: pass
@@ -26,18 +26,18 @@ export class ConexionService {
   }
 
   planes() {
-    let url = this.apiUrl + 'method/asimed.kentowebws.websw.planes';
+    let url = this.apiUrl + 'api/method/asimed.kentowebws.websw.planes';
 
     return this.httpClient.get( url , { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
   getEdades() {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getEdades';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getEdades';
 
     return this.httpClient.get( url , { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
 
   getPlanes(beneficiarios) {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getPlanes';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getPlanes';
     let datos = {
       datos:{ beneficiarios: beneficiarios}
      
@@ -46,7 +46,7 @@ export class ConexionService {
   }
 
   getCondiciones_pdf(plan) {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getCondiciones_pdf';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getCondiciones_pdf';
     let datos = {
       datos:{ plan: plan}
      
@@ -56,7 +56,7 @@ export class ConexionService {
   }
 
   getTmpEntidad_pdf(name) {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getTmpEntidad_pdf';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getTmpEntidad_pdf';
     let datos = {
       datos:{ identificador: name}
      
@@ -66,9 +66,9 @@ export class ConexionService {
   }
 
   sendmail_Cotizacion(name,broker) {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.sendmail_Cotizacion';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.sendmail_Cotizacion';
     let datos = {
-      datos:{ identificador: name,broker:broker}
+      datos:{ identificador: name,broker:broker,kyana:0}
      
     };
     console.log(datos)
@@ -78,19 +78,19 @@ export class ConexionService {
 
 
   getCiudades(){
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.localidades'
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.localidades'
     return this.httpClient.post( url , {}, { headers:  { 'Content-Type': 'application/json'} });
   }
 
   getDetallePlanHTML(plan) {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getDetallePlanHTML';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getDetallePlanHTML';
     let datos ={ plan: plan}
      
     return this.httpClient.post( url ,datos, { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
 
   insertDatos(registro:Registro): Observable<any>{
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.insertDatos'
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.insertDatos'
     let datos = {
       datos:registro
      
@@ -100,13 +100,13 @@ export class ConexionService {
   }
 
   getBrokers() {
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.getBrokers';
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getBrokers';
 
     return this.httpClient.get( url , { headers: { 'Content-Type': 'application/json'},responseType: 'json' });
   }
 
   validarDatos(validar:Validar): Observable<any>{
-    let url = this.apiUrl + 'method/asimed.mod_poliza_elec.api_rest.validarDatos'
+    let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.validarDatos'
     let datos = {
       datos:validar
      
@@ -116,7 +116,7 @@ export class ConexionService {
   }
 
   verificarExistencia(cedula:String): Observable<any>{
-    let url = this.apiUrl + 'method/asimed.kentowebws.websw.verificarExistencia'
+    let url = this.apiUrl + 'api/method/asimed.kentowebws.websw.verificarExistencia'
     let datos = {
       cedula:cedula
      

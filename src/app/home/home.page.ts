@@ -10,6 +10,7 @@ import { formatDate } from "@angular/common";
 import { RegisSubs, Subscription } from '../entidades/regis-subs';
 import Swal from 'sweetalert2';
 import { DetalleplanPage } from '../detalleplan/detalleplan.page';
+import { environment } from 'src/environments/environment';
 
 
 declare var externo;
@@ -92,7 +93,7 @@ export class HomePage {
     cssClass: 'customAlertCss',
 
   };
-
+  apiUrl = environment.apiUrl
   principal: boolean=true;
   principal2: boolean=false;
   estcivi: boolean = true;
@@ -301,10 +302,6 @@ this.estadoConsulta=true;
 
 this.planesFinalizar= data["message"].datoList;
       console.log(this.listaPlanes);
-    
-
-
-
 
     }, error => {
       console.log(error);
@@ -570,10 +567,6 @@ console.log(edad)
   }
 
   update() {
-
-
-
-
     console.log(this.currentactive);
     this.counts.forEach((element, i) => {
       console.log(i);
