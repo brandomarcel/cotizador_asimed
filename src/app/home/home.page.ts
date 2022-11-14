@@ -309,11 +309,17 @@ this.planesFinalizar= data["message"].datoList;
   }
 
   async getCondiciones_pdf(item) {
-    console.log(item.plan);
-
-
 
     const loading = await this.loadingController.create({ message: 'Descargando ...' })
+    await loading.present();
+    try {
+      window.open(this.apiUrl+item)
+    loading.dismiss();
+    } catch (error) {
+      this.sweetMensaje('Error al descargar!','error')
+    }
+    
+    /* const loading = await this.loadingController.create({ message: 'Descargando ...' })
     await loading.present();
     this.conexionService.getCondiciones_pdf(item.plan).subscribe(data => {
 
@@ -325,7 +331,7 @@ this.planesFinalizar= data["message"].datoList;
       loading.dismiss();
       this.sweetMensaje('Error al descarga!','error')
       console.log(error);
-    });
+    }); */
   }
 
   getCiudades() {
@@ -803,6 +809,36 @@ console.log(edad)
       console.log(data.message);
 
       this.listapagosDevuelta=data.message.datoList
+
+      console.log('(this.planesFinalizar);',this.planesFinalizar);
+      
+      console.log('(this.listapagosDevuelta);',this.listapagosDevuelta);
+      this.planesFinalizar.forEach((element,i) => {
+        this.listapagosDevuelta.forEach((item,i) => {
+/*           console.log(element.plan);
+
+          console.log(element.descripcion[10].valor);
+          console.log(item); */
+          const nuev = item
+
+           if (element.plan == item.plan) {
+            nuev.imagen=element.descripcion[10].valor;
+
+          } 
+        });
+
+        
+       
+
+     
+        
+      });
+
+      console.log(this.listapagosDevuelta);
+      
+
+
+
       this.frecuenciPagos = "Mensual"
       this.mens = data.message.datoList[0].prima_mensual;
       this.impu = data.message.datoList[0].impuestos;
