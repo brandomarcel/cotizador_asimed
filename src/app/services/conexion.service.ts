@@ -48,7 +48,7 @@ export class ConexionService {
   getCondiciones_pdf(plan) {
     let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getCondiciones_pdf';
     let datos = {
-      datos:{ plan: plan}
+      datos:{ plan: plan,portal: 0}
      
     };
     console.log(datos)
@@ -58,7 +58,7 @@ export class ConexionService {
   getTmpEntidad_pdf(name) {
     let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.getTmpEntidad_pdf';
     let datos = {
-      datos:{ identificador: name}
+      datos:{ identificador: name,portal: 0}
      
     };
     console.log(datos)
@@ -68,7 +68,7 @@ export class ConexionService {
   sendmail_Cotizacion(name,broker) {
     let url = this.apiUrl + 'api/method/asimed.mod_poliza_elec.api_rest.sendmail_Cotizacion';
     let datos = {
-      datos:{ identificador: name,broker:broker,kyana:0}
+      datos:{ identificador: name,broker:broker,kyana:0,portal: 0}
      
     };
     console.log(datos)

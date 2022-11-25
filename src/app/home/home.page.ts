@@ -302,6 +302,8 @@ this.estadoConsulta=true;
 
 this.planesFinalizar= data["message"].datoList;
       console.log(this.listaPlanes);
+      const result= this.listaPlanes.sort((a, b) => a.prima_mensual - b.prima_mensual);
+      this.listaPlanes=result;
 
     }, error => {
       console.log(error);
